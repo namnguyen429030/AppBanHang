@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBanHang", "AppBanHang\AppBanHang.csproj", "{4753FD8D-C664-4FE4-B97E-8AD025945A27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppBanHang.Desktop", "AppBanHang.Desktop\AppBanHang.Desktop.csproj", "{8E73C651-313E-4201-AE2A-AB70B0D4A58C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4753FD8D-C664-4FE4-B97E-8AD025945A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4753FD8D-C664-4FE4-B97E-8AD025945A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4753FD8D-C664-4FE4-B97E-8AD025945A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4753FD8D-C664-4FE4-B97E-8AD025945A27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E73C651-313E-4201-AE2A-AB70B0D4A58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E73C651-313E-4201-AE2A-AB70B0D4A58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E73C651-313E-4201-AE2A-AB70B0D4A58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E73C651-313E-4201-AE2A-AB70B0D4A58C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
