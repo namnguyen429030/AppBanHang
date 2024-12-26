@@ -18,10 +18,6 @@ namespace AppBanHang.Models
         public ResponseData? Data { get; set; }
         public class ResponseData
         {
-            [JsonPropertyName("acpId")]
-            public int AcpId { get; set; }
-            [JsonPropertyName("accountName")]
-            public required string AcccountName { get; set; }
             [JsonPropertyName("qrCode")]
             public required string QRCode { get; set; }
             [JsonPropertyName("qrDataURL")]

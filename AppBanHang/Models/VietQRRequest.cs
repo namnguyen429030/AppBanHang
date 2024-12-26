@@ -4,7 +4,7 @@ namespace AppBanHang.Models
 {
     public class VietQRRequest
     {
-        [JsonPropertyName("acccountNo")]
+        [JsonPropertyName("accountNo")]
         public required string AccountNo { get; set; }
         [JsonPropertyName("accountName")]
         public string? AccountName { get; set; }
