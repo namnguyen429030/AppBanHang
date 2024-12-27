@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AppBanHang.Models
+namespace AppBanHang.Models.APIModels
 {
     public class VietQRResponse
     {

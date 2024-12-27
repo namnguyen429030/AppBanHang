@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace AppBanHang.Models
+namespace AppBanHang.Models.APIModels
 {
     public class VietQRRequest
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AppBanHang.Models
 {
-    public class UserInfo
+    public class User
     {
         public required string Username { get; set; }
         public required string Password { get; set; }

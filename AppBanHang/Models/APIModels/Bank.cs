@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace AppBanHang.Models
+namespace AppBanHang.Models.APIModels
 {
     public class Bank
     {
