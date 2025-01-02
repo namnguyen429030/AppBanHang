@@ -4,8 +4,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:AppBanHang.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
         x:Class="AppBanHang.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AppBanHang">
+        Title="AppBanHang"
+		WindowStartupLocation="CenterScreen"
+		WindowState="FullScreen">
+	<Grid>
+		<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+			<UniformGrid Rows="1" Columns="6" Margin="0, 0, 0, 50" Height="200" Background="Green">
+				<UniformGrid.Styles>
+					<Style Selector="Button">
+						<Setter Property="Width" Value="200"/>
+						<Setter Property="Height" Value="100"/>
+						<Setter Property="FontSize" Value="25"/>
+						<Setter Property="FontWeight" Value="Bold"/>
+						<Setter Property="Background" Value="#2196F3"/>
+						<Setter Property="Foreground" Value="White"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						<Setter Property="CornerRadius" Value="4"/>
+					</Style>
+				</UniformGrid.Styles>
+				<Button x:Name="btnHome" Content="Trang chủ" Grid.Column="0" Grid.Row="0" Click="btnHome_Click"/>
+				<Button x:Name="btnStock" Content="Kho hàng" Grid.Column="1" Grid.Row="0" Click="btnStock_Click"></Button>
+				<Button x:Name="btnOrder" Content="Hàng đặt" Grid.Column="2" Grid.Row="0" Click="btnOrder_Click"></Button>
+				<Button x:Name="btnPayment" Content="Thanh toán" Grid.Column="3" Grid.Row="0" Click="btnPayment_Click"></Button>
+				<Button x:Name="btnHistory" Content="Lịch sử" Grid.Column="4" Grid.Row="0" Click="btnHistory_Click"></Button>
+				<Button x:Name="btnQuit" Content="Thoát" Grid.Column="5" Grid.Row="0" Click="btnQuit_Click"></Button>
+			</UniformGrid>
+		</StackPanel>
+	</Grid>
 </Window>

@@ -2,11 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="AppBanHang.PaymentView"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="AppBanHang.Views.MainView"
 			 Background="Black"
 			 Foreground="Yellow"
-			 VerticalAlignment="Center"
-			 HorizontalAlignment="Center">
-    PaymentView
+			 HorizontalAlignment="Center"
+			 VerticalAlignment="Center">
+  Welcome to Avalonia!
 </UserControl>
