@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AppBanHang.Models.DTOs;
+namespace AppBanHang.Models;
 
 public partial class ReceiptInfo
 {

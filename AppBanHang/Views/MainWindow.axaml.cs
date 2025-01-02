@@ -1,12 +1,12 @@
-﻿using Avalonia.Controls;
-using Avalonia.Interactivity;
+using Avalonia.Controls;
 
-namespace AppBanHang.Views;
-
-public partial class MainWindow : Window
+namespace AppBanHang.Views
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }

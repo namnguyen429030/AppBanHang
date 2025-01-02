@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace AppBanHang.Models.DTOs;
+namespace AppBanHang.Models;
 
 public partial class AppBanHangContext : DbContext
 {
