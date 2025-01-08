@@ -1,32 +1,29 @@
+﻿using AppBanHang.ViewModels.Views;
+using AppBanHang.Views;
+using ReactiveUI;
 using System;
-using AppBanHang.ViewModels;
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
 
 namespace AppBanHang
 {
-    public class ViewLocator : IDataTemplate
+    public class ViewLocator : IViewLocator
     {
-
-        public Control? Build(object? param)
+        public IViewFor? ResolveView<T>(T? viewModel, string? contract = null)
         {
-            if (param is null)
-                return null;
-
-            var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-            var type = Type.GetType(name);
-
-            if (type != null)
+            switch (viewModel)
             {
-                return (Control)Activator.CreateInstance(type)!;
+                case HomeViewModel:
+                    return new HomeView();
+                case StockViewModel:
+                    return new StockView();
+                case HistoryViewModel:
+                    return new HistoryView();
+                case OrderViewModel:
+                    return new OrderView();
+                case PaymentViewModel:
+                    return new PaymentView();
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(viewModel));
             }
-
-            return new TextBlock { Text = "Not Found: " + name };
-        }
-
-        public bool Match(object? data)
-        {
-            return data is ViewModelBase;
         }
     }
 }

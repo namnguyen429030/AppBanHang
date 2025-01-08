@@ -1,0 +1,37 @@
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:vm="using:AppBanHang.ViewModels.Views"
+			xmlns:m ="using:AppBanHang.Models"
+			xmlns:rxui="http://reactiveui.net"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			xmlns:components="using:AppBanHang.Views.Components"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="AppBanHang.Views.StockView"
+			x:DataType="vm:StockViewModel"
+			>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="350"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<ListBox Grid.Column="0" ItemsSource="{Binding Products}">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Columns="3"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate DataType="{x:Type m:Product}">
+					<Button HorizontalAlignment="Center" VerticalAlignment="Center">
+						<TextBlock Text="{Binding Name}"></TextBlock>
+					</Button>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<Panel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<components:TouchScreenNumericInput/>
+		</Panel>
+	</Grid>
+
+</rxui:ReactiveUserControl>

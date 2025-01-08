@@ -1,0 +1,55 @@
+<Window 
+		xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AppBanHang.ViewModels.Windows"
+		xmlns:app="clr-namespace:AppBanHang;assembly=AppBanHang"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:rxui="http://reactiveui.net"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+        x:Class="AppBanHang.Views.Windows.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AppBanHang"
+		WindowStartupLocation="CenterScreen"
+		WindowState="FullScreen">
+	<Grid Background="Red">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<StackPanel Grid.Row="0" Orientation="Vertical" ZIndex="1" Margin="0, 15, 0, 0">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="Gray">
+				<StackPanel.Styles>
+					<Style Selector="Button">
+						<Setter Property="Width" Value="200"/>
+						<Setter Property="Height" Value="80"/>
+						<Setter Property="FontSize" Value="30"/>
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+						<Setter Property="Background" Value="DarkGray"/>
+						<Setter Property="ClipToBounds" Value="True"/>
+					</Style>
+				</StackPanel.Styles>
+				<Button x:Name="homeBtn" Content="Trang chủ"></Button>
+				<Button x:Name="stockBtn" Content="Kho"></Button>
+				<Button x:Name="orderBtn" Content="Đặt hàng"></Button>
+				<Button x:Name="historyBtn" Content="Lịch sử"></Button>
+				<Button x:Name="paymentBtn" Content="Thanh toán"></Button>
+				<Button x:Name="quitBtn" Content="Thoát" Click="QuitCommand"></Button>
+			</StackPanel>
+		</StackPanel>
+		<ScrollViewer Grid.Row="1">
+			<rxui:RoutedViewHost
+				Name="RoutedViewHost"
+				PageTransition="{x:Null}">
+			<rxui:RoutedViewHost.DefaultContent>
+
+			</rxui:RoutedViewHost.DefaultContent>
+			<rxui:RoutedViewHost.ViewLocator>
+				<app:ViewLocator/>
+			</rxui:RoutedViewHost.ViewLocator>
+		</rxui:RoutedViewHost>
+		</ScrollViewer>
+	</Grid>
+</Window>
