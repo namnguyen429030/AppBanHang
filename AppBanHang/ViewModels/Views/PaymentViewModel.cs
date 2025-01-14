@@ -3,6 +3,7 @@ using AppBanHang.ViewModels.Base;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Threading.Tasks;
 
 namespace AppBanHang.ViewModels.Views
 {
@@ -20,20 +21,12 @@ namespace AppBanHang.ViewModels.Views
         {
             _context = context;
             Products = new(_context.Products);
-
-            AddPaymentCommand = ReactiveCommand.Create(AddPayment);
+            AddPaymentCommand = ReactiveCommand.CreateFromTask(AddPayment);
         }
 
-        private async void AddPayment()
+        private async Task AddPayment()
         {
-            var newProduct = new Product()
-            {
-                Name = "San pham moi",
-                OwnerId = 1
-            };
-            Products?.Add(newProduct);
-            await _context.Products.AddAsync(newProduct);
-            await _context.SaveChangesAsync();
+
         }
     }
 }

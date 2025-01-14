@@ -52,6 +52,7 @@
 				<TextBlock Text="Số lượng"/>
 				<components:TouchScreenNumericInput x:Name="numberInput"/>
 				<Button x:Name="addPaymentBtn" Content="Thêm" Command="{Binding AddPaymentCommand}" IsEnabled="False"/>
+				<Button x:Name="cancelPaymentBtn" Content="Hủy đơn" IsEnabled="False" Background="Red"/>
 				<Button x:Name="confirmPaymentBtn" Content="Xác nhận đơn" IsEnabled="False"/>
 			</StackPanel>
 		</StackPanel>

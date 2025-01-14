@@ -3,6 +3,7 @@ using AppBanHang.ViewModels.Base;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reactive;
 
 namespace AppBanHang.ViewModels.Views
 {
@@ -26,5 +27,7 @@ namespace AppBanHang.ViewModels.Views
             _context = context;
             Products = new(_context.Products);
         }
+        public ReactiveCommand<Unit, Unit> ChooseProductCommand;
+
     }
 }
