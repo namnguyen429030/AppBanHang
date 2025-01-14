@@ -2,81 +2,29 @@
 using AppBanHang.ViewModels.Base;
 using ReactiveUI;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace AppBanHang.ViewModels.Views
 {
     public class StockViewModel : RoutableViewModelBase
     {
-        public ObservableCollection<Product> Products { get; set; }
-        public StockViewModel(IScreen hostScreen) : base(hostScreen)
+        private readonly ShopManagementAppContext _context;
+        private ObservableCollection<Product>? _products;
+        private Product _selectedProduct;
+        public ObservableCollection<Product>? Products
         {
-            Products = new()
-            {
-                new()
-                {
-                    Name = "Gio lon"
-                },
-                new()
-                {
-                    Name = "Gio bo"
-                },
-                new()
-                {
-                    Name = "Gio mo"
-                },
-                new()
-                {
-                    Name = "Banh chung"
-                },
-                new()
-                {
-                    Name = "Gio lon"
-                },
-                new()
-                {
-                    Name = "Gio bo"
-                },
-                new()
-                {
-                    Name = "Gio mo"
-                },
-                new()
-                {
-                    Name = "Banh chung"
-                },
-                new()
-                {
-                    Name = "Gio lon"
-                },
-                new()
-                {
-                    Name = "Gio bo"
-                },
-                new()
-                {
-                    Name = "Gio mo"
-                },
-                new()
-                {
-                    Name = "Banh chung"
-                },
-                new()
-                {
-                    Name = "Gio lon"
-                },
-                new()
-                {
-                    Name = "Gio bo"
-                },
-                new()
-                {
-                    Name = "Gio mo"
-                },
-                new()
-                {
-                    Name = "Banh chung"
-                },
-            };
+            get => _products;
+            set => this.RaiseAndSetIfChanged(ref _products, value);
+        }
+        public Product SelectedProduct
+        {
+            get => _selectedProduct;
+            set => this.RaiseAndSetIfChanged(ref _selectedProduct, value);
+        }
+        public StockViewModel(IScreen hostScreen, ShopManagementAppContext context) : base(hostScreen)
+        {
+            _context = context;
+            Products = new(_context.Products);
         }
     }
 }

@@ -13,6 +13,8 @@ public partial class OrderProduct
 
     public int? Discount { get; set; }
 
+    public int TotalPrice { get; set; }
+
     public virtual Order Order { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;

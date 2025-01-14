@@ -1,15 +1,14 @@
 <rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
-			 xmlns:vm="using:AppBanHang.ViewModels.Views"
-			xmlns:m ="using:AppBanHang.Models"
-			xmlns:rxui="http://reactiveui.net"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			xmlns:components="using:AppBanHang.Views.Components"
-             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
-             x:Class="AppBanHang.Views.StockView"
-			x:DataType="vm:StockViewModel"
-			>
+						  xmlns:vm="using:AppBanHang.ViewModels.Views"
+						  xmlns:m ="using:AppBanHang.Models"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  xmlns:components="using:AppBanHang.Views.Components"
+						  mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+						  x:Class="AppBanHang.Views.StockView"
+						  x:DataType="vm:StockViewModel">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"></ColumnDefinition>
@@ -23,15 +22,25 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate DataType="{x:Type m:Product}">
-					<Button HorizontalAlignment="Center" VerticalAlignment="Center">
-						<TextBlock Text="{Binding Name}"></TextBlock>
-					</Button>
+					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+					</Border>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
-		<Panel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-			<components:TouchScreenNumericInput/>
-		</Panel>
+		<StackPanel Grid.Column="1" Spacing="15" HorizontalAlignment="Center">
+			<StackPanel.Styles>
+				<Style Selector="TextBlock">
+					<Setter Property="FontSize" Value="40"/>
+					<Setter Property="FontWeight" Value="Bold"/>
+				</Style>
+				<Style Selector="Button">
+					<Setter Property="FontSize" Value="40"/>
+				</Style>
+			</StackPanel.Styles>
+			<TextBlock Text="Kho"/>
+			<Button></Button>
+		</StackPanel>
 	</Grid>
 
 </rxui:ReactiveUserControl>

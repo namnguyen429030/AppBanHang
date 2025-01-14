@@ -1,8 +1,10 @@
+using AppBanHang.Models;
 using AppBanHang.ViewModels.Windows;
 using AppBanHang.Views.Windows;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
 using System.Reflection;
@@ -19,11 +21,17 @@ namespace AppBanHang
 
         public override void OnFrameworkInitializationCompleted()
         {
+            var services = new ServiceCollection();
+            services.AddDbContext<ShopManagementAppContext>();
+
+            var serviceProvider = services.BuildServiceProvider();
+
+            var dbContext = serviceProvider.GetRequiredService<ShopManagementAppContext>();
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
+                desktop.MainWindow = new MainWindow(dbContext)
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainWindowViewModel(dbContext),
                 };
             }
             base.OnFrameworkInitializationCompleted();

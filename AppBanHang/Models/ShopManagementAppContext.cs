@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AppBanHang.Models;
 
-public partial class AppBanHangContext : DbContext
+public partial class ShopManagementAppContext : DbContext
 {
-    public AppBanHangContext()
+    public ShopManagementAppContext()
     {
     }
 
-    public AppBanHangContext(DbContextOptions<AppBanHangContext> options)
+    public ShopManagementAppContext(DbContextOptions<ShopManagementAppContext> options)
         : base(options)
     {
     }
@@ -37,7 +37,7 @@ public partial class AppBanHangContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("Data Source=D:\\Downloads\\test.db");
+        => optionsBuilder.UseSqlite("Data Source=D:\\Downloads\\init.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -48,7 +48,7 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.Id, "IX_BankAccount_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.AccountNo).HasColumnName("account_no");
             entity.Property(e => e.Alias).HasColumnName("alias");
@@ -67,7 +67,7 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Customer_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.PhoneNumber).HasColumnName("phone_number");
@@ -102,7 +102,7 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Order_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.IsReceived)
                 .HasDefaultValueSql("'0'")
@@ -132,6 +132,7 @@ public partial class AppBanHangContext : DbContext
             entity.Property(e => e.Discount).HasColumnName("discount");
             entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.TotalPrice).HasColumnName("total_price");
 
             entity.HasOne(d => d.Order).WithOne()
                 .HasForeignKey<OrderProduct>(d => d.OrderId)
@@ -149,7 +150,7 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.Id, "IX_PaymentMethod_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.IconAddress).HasColumnName("icon_address");
             entity.Property(e => e.Name).HasColumnName("name");
@@ -162,7 +163,7 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Product_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.ImageAddress).HasColumnName("image_address");
             entity.Property(e => e.Instock)
@@ -186,7 +187,7 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Receipt_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedDate).HasColumnName("created_date");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
@@ -216,6 +217,7 @@ public partial class AppBanHangContext : DbContext
             entity.Property(e => e.Discount).HasColumnName("discount");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.ReceiptId).HasColumnName("receipt_id");
+            entity.Property(e => e.TotalValue).HasColumnName("total_value");
 
             entity.HasOne(d => d.Product).WithMany()
                 .HasForeignKey(d => d.ProductId)
@@ -235,20 +237,14 @@ public partial class AppBanHangContext : DbContext
             entity.HasIndex(e => e.UserName, "IX_User_user_name").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
-            entity.Property(e => e.Alias)
-                .HasDefaultValue("50")
-                .HasColumnName("alias");
+            entity.Property(e => e.Alias).HasColumnName("alias");
+            entity.Property(e => e.ApiKey).HasColumnName("api_key");
             entity.Property(e => e.ChecksumKey).HasColumnName("checksum_key");
             entity.Property(e => e.ClientKey).HasColumnName("client_key");
-            entity.Property(e => e.Password)
-                .HasDefaultValue("64")
-                .HasColumnName("password");
-            entity.Property(e => e.UserKey).HasColumnName("user_key");
-            entity.Property(e => e.UserName)
-                .HasDefaultValue("25")
-                .HasColumnName("user_name");
+            entity.Property(e => e.Password).HasColumnName("password");
+            entity.Property(e => e.UserName).HasColumnName("user_name");
         });
 
         OnModelCreatingPartial(modelBuilder);

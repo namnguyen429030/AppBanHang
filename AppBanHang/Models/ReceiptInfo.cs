@@ -13,6 +13,8 @@ public partial class ReceiptInfo
 
     public int? Discount { get; set; }
 
+    public int TotalValue { get; set; }
+
     public virtual Product Product { get; set; } = null!;
 
     public virtual Receipt Receipt { get; set; } = null!;

@@ -1,15 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using System;
 
 namespace AppBanHang.Views.Components
 {
-    public partial class TouchScreenNumericInput : TouchScreenInput
+
+    public partial class TouchScreenTextInput : TouchScreenInput
     {
-        public TouchScreenNumericInput()
+        public TouchScreenTextInput()
         {
             AvaloniaXamlLoader.Load(this);
             KeyboardPopup = this.FindControl<Popup>("keyboardPopup");

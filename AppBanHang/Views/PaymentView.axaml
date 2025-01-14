@@ -1,10 +1,59 @@
 <rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
-			 xmlns:vm="using:AppBanHang.ViewModels.Views"
-			xmlns:rxui="http://reactiveui.net"
-			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="AppBanHang.Views.PaymentView">
-  PaymentView
+						  xmlns:vm="using:AppBanHang.ViewModels.Views"
+						  xmlns:m="using:AppBanHang.Models"
+						  xmlns:components="using:AppBanHang.Views.Components"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+						  x:Class="AppBanHang.Views.PaymentView"
+						  x:DataType="vm:PaymentViewModel">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="350"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<ListBox Grid.Column="0" ItemsSource="{Binding Products}" SelectionChanged="SelectProduct">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Columns="3"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
+				<DataTemplate DataType="{x:Type m:Product}">
+					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Grid.Column="1" Spacing="15" HorizontalAlignment="Center">
+			<TextBlock Text="Thanh toán" FontSize="{StaticResource ViewTitleFontSize}" FontWeight="Bold"/>
+			<DataGrid ItemsSource=""
+					  AutoGenerateColumns="True"
+					  IsReadOnly="True"
+					  GridLinesVisibility="All"
+					  BorderThickness="1"
+					  BorderBrush="Gray">
+				
+			</DataGrid>
+			<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="15">
+				<StackPanel.Styles>
+					<Style Selector="TextBlock">
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+					</Style>
+					<Style Selector="StackPanel > Button">
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						<Setter Property="Width" Value="350"/>
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+					</Style>
+				</StackPanel.Styles>
+				<TextBlock Text="Số lượng"/>
+				<components:TouchScreenNumericInput x:Name="numberInput"/>
+				<Button x:Name="addPaymentBtn" Content="Thêm" Command="{Binding AddPaymentCommand}" IsEnabled="False"/>
+				<Button x:Name="confirmPaymentBtn" Content="Xác nhận đơn" IsEnabled="False"/>
+			</StackPanel>
+		</StackPanel>
+	</Grid>
 </rxui:ReactiveUserControl>

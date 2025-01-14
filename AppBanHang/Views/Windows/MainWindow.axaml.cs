@@ -1,3 +1,4 @@
+using AppBanHang.Models;
 using AppBanHang.ViewModels.Windows;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -12,10 +13,10 @@ namespace AppBanHang.Views.Windows
 {
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-        public MainWindow()
+        public MainWindow(ShopManagementAppContext context)
         {
             InitializeComponent();
-            ViewModel = new();
+            ViewModel = new(context);
             this.WhenActivated(disposables =>
             {
                 this.OneWayBind(ViewModel, x => x.Router, x => x.RoutedViewHost.Router)

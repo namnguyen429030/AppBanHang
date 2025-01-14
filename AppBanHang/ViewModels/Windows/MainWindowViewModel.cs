@@ -1,4 +1,5 @@
-﻿using AppBanHang.ViewModels.Base;
+﻿using AppBanHang.Models;
+using AppBanHang.ViewModels.Base;
 using AppBanHang.ViewModels.Views;
 using ReactiveUI;
 using System.Reactive;
@@ -13,15 +14,14 @@ namespace AppBanHang.ViewModels.Windows
         public ReactiveCommand<Unit, IRoutableViewModel> GoToStockView { get; }
         public ReactiveCommand<Unit, IRoutableViewModel> GoToPaymentView { get; }
 
-        
 
-        public MainWindowViewModel() : base()
+        public MainWindowViewModel(ShopManagementAppContext context) : base()
         {
-            IRoutableViewModel homeViewModel = new HomeViewModel(this);
-            IRoutableViewModel historyViewModel = new HistoryViewModel(this);
-            IRoutableViewModel orderViewModel = new OrderViewModel(this);
-            IRoutableViewModel stockViewModel = new StockViewModel(this);
-            IRoutableViewModel paymentViewModel = new PaymentViewModel(this);
+            IRoutableViewModel homeViewModel = new HomeViewModel(this, context);
+            IRoutableViewModel historyViewModel = new HistoryViewModel(this, context);
+            IRoutableViewModel orderViewModel = new OrderViewModel(this, context);
+            IRoutableViewModel stockViewModel = new StockViewModel(this, context);
+            IRoutableViewModel paymentViewModel = new PaymentViewModel(this, context);
 
             Router.Navigate.Execute(homeViewModel);
 

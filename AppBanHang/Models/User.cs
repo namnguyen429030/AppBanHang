@@ -15,7 +15,7 @@ public partial class User
 
     public string? ClientKey { get; set; }
 
-    public string? UserKey { get; set; }
+    public string? ApiKey { get; set; }
 
     public string? ChecksumKey { get; set; }
 

@@ -1,14 +1,15 @@
-<rxui:ReactiveUserControl
-	        xmlns="https://github.com/avaloniaui"
-			xmlns:rxui="http://reactiveui.net"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:vm="using:AppBanHang.ViewModels.Views"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="AppBanHang.Views.HomeView"
-			 x:DataType="vm:HomeViewModel">
-	<Grid>
-		
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:vm="using:AppBanHang.ViewModels.Views"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  xmlns:components="using:AppBanHang.Views.Components"
+						  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+						  x:Class="AppBanHang.Views.HomeView"
+						  x:DataType="vm:HomeViewModel">
+	<Grid RowDefinitions="100, 100">
+		<components:TouchScreenTextInput Grid.Row="0"></components:TouchScreenTextInput>
+		<components:TouchScreenNumericInput Grid.Row="1"></components:TouchScreenNumericInput>
 	</Grid>
 </rxui:ReactiveUserControl>

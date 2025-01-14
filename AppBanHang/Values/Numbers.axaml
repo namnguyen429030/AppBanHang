@@ -1,0 +1,21 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=System.Runtime">
+	<system:Double x:Key="NavigationButtonWidth">200</system:Double>
+	<system:Double x:Key="NavigationButtonHeight">80</system:Double>
+	<system:Double x:Key="NavigationButtonFontSize">30</system:Double>
+	<system:Double x:Key="NavigationButtonsSpacing">50</system:Double>
+
+	<system:Double x:Key="KeycapWidth">100</system:Double>
+	<system:Double x:Key="KeycapHeight">100</system:Double>
+	<system:Double x:Key="NumpadWidth">80</system:Double>
+	<system:Double x:Key="NumpadHeight">80</system:Double>
+
+	<system:Double x:Key="ItemBoxWidth">200</system:Double>
+	<system:Double x:Key="ItemBoxHeight">200</system:Double>
+
+	<system:Double x:Key="ViewTitleFontSize">40</system:Double>
+	<system:Double x:Key="ViewContentFontSize">25</system:Double>
+	<system:Double x:Key="NumpadButtonFontSize">50</system:Double>
+	<system:Double x:Key="KeyboardButtonFontSize">70</system:Double>
+</ResourceDictionary>

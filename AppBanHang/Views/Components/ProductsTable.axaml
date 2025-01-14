@@ -1,0 +1,25 @@
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:m="using:AppBanHang.Models"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+						  x:Class="AppBanHang.Views.Components.ProductsTable"
+						  xmlns:vm="using:AppBanHang.ViewModels.Components"
+						  x:DataType="vm:ProductTableViewModel">
+	<ListBox Grid.Column="0" ItemsSource="{Binding Products}">
+		<ListBox.ItemsPanel>
+			<ItemsPanelTemplate>
+				<UniformGrid Columns="3"/>
+			</ItemsPanelTemplate>
+		</ListBox.ItemsPanel>
+		<ListBox.ItemTemplate>
+			<DataTemplate DataType="{x:Type m:Product}">
+				<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+					<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+				</Border>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+</rxui:ReactiveUserControl>
