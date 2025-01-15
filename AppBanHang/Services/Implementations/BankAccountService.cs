@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppBanHang.Repositories.Interfaces;
+using AppBanHang.Services.Interfaces;
 
 namespace AppBanHang.Services.Implementations
 {
-    internal class BankAccountService
+    public class BankAccountService : IBankAccountService
     {
+        private readonly IBankAccountRepository _bankAccountRepository;
+        public BankAccountService(IBankAccountRepository bankAccountRepository)
+        {
+            _bankAccountRepository = bankAccountRepository;
+        }
     }
 }

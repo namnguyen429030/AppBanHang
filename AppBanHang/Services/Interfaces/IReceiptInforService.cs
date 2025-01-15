@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AppBanHang.Services.Interfaces
+﻿namespace AppBanHang.Services.Interfaces
 {
-    internal interface IReceiptInforService
+    public interface IReceiptInforService
     {
     }
 }

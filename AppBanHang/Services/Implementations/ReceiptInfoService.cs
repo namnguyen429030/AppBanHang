@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppBanHang.Repositories.Interfaces;
+using AppBanHang.Services.Interfaces;
 
 namespace AppBanHang.Services.Implementations
 {
-    internal class ReceiptInfoService
+    public class ReceiptInfoService : IReceiptInforService
     {
+        private readonly IReceiptInfoRepository _receiptInfoRepository;
+        public ReceiptInfoService(IReceiptInfoRepository receiptInfoRepository)
+        {
+            _receiptInfoRepository = receiptInfoRepository;
+        }
     }
 }

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppBanHang.Models;
 
 namespace AppBanHang.Repositories.Interfaces
 {
-    internal interface ICustomerRepository
+    public interface ICustomerRepository : IRepository<int, Customer>
     {
     }
 }

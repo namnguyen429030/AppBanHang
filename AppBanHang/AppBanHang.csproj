@@ -11,7 +11,6 @@
   <ItemGroup>
     <Folder Include="DTOs\" />
     <AvaloniaResource Include="Assets\**" />
-    <Folder Include="Repositories\Implementations\" />
   </ItemGroup>
 
   <ItemGroup>

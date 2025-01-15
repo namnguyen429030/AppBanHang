@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AppBanHang.Repositories.Interfaces;
+using AppBanHang.Services.Interfaces;
 
 namespace AppBanHang.Services.Implementations
 {
-    internal class OrderProductService
+    public class OrderProductService : IOrderProductService
     {
+        private readonly IOrderProductRepository _orderProductRepository;
+        public OrderProductService(IOrderProductRepository orderProductRepository)
+        {
+            _orderProductRepository = orderProductRepository;
+        }
     }
 }

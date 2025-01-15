@@ -2,7 +2,7 @@
 
 namespace AppBanHang.Repositories.Interfaces
 {
-    public interface IOrderRepository : IRepository<int, Order>
+    public interface IReceiptInfoRepository : IRepository<int, ReceiptInfo>
     {
     }
 }
