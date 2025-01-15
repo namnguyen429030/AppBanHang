@@ -1,4 +1,5 @@
 ﻿using AppBanHang.Models;
+using AppBanHang.Services.Interfaces;
 using AppBanHang.ViewModels.Base;
 using ReactiveUI;
 using System.Collections.ObjectModel;
@@ -9,9 +10,9 @@ namespace AppBanHang.ViewModels.Views
 {
     public class StockViewModel : RoutableViewModelBase
     {
-        private readonly ShopManagementAppContext _context;
         private ObservableCollection<Product>? _products;
         private Product _selectedProduct;
+        private readonly IProductService _productService;
         public ObservableCollection<Product>? Products
         {
             get => _products;
@@ -22,10 +23,10 @@ namespace AppBanHang.ViewModels.Views
             get => _selectedProduct;
             set => this.RaiseAndSetIfChanged(ref _selectedProduct, value);
         }
-        public StockViewModel(IScreen hostScreen, ShopManagementAppContext context) : base(hostScreen)
+        public StockViewModel(IScreen hostScreen, IProductService productService) : base(hostScreen)
         {
-            _context = context;
-            Products = new(_context.Products);
+            _productService = productService;
+            Products = new ObservableCollection<Product>(_productService.GetAllProducts());
         }
         public ReactiveCommand<Unit, Unit> ChooseProductCommand;
 

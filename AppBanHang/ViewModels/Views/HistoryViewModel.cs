@@ -6,7 +6,7 @@ namespace AppBanHang.ViewModels.Views
 {
     public class HistoryViewModel : RoutableViewModelBase
     {
-        public HistoryViewModel(IScreen hostScreen, ShopManagementAppContext context) : base(hostScreen)
+        public HistoryViewModel(IScreen hostScreen) : base(hostScreen)
         {
         }
     }

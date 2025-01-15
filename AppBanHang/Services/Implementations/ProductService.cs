@@ -1,5 +1,7 @@
-﻿using AppBanHang.Repositories.Interfaces;
+﻿using AppBanHang.Models;
+using AppBanHang.Repositories.Interfaces;
 using AppBanHang.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace AppBanHang.Services.Implementations
 {
@@ -9,6 +11,11 @@ namespace AppBanHang.Services.Implementations
         public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
+        }
+
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return _productRepository.GetAll();
         }
     }
 }

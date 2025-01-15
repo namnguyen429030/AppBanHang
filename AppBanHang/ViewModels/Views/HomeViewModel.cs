@@ -6,7 +6,7 @@ namespace AppBanHang.ViewModels.Views
 {
     public class HomeViewModel : RoutableViewModelBase
     {
-        public HomeViewModel(IScreen hostScreen, ShopManagementAppContext context) : base(hostScreen)
+        public HomeViewModel(IScreen hostScreen) : base(hostScreen)
         {
         }
     }

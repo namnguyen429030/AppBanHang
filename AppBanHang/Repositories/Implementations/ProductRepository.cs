@@ -48,7 +48,7 @@ namespace AppBanHang.Repositories.Implementations
 
         public IEnumerable<Product> GetAll()
         {
-            throw new System.NotImplementedException();
+            return shopManagementAppContext.Products;
         }
 
         public Task<IEnumerable<Product>> GetAllAsync()

@@ -6,7 +6,7 @@ namespace AppBanHang.ViewModels.Views
 {
     public class OrderViewModel : RoutableViewModelBase
     {
-        public OrderViewModel(IScreen hostScreen, ShopManagementAppContext context) : base(hostScreen)
+        public OrderViewModel(IScreen hostScreen) : base(hostScreen)
         {
         }
     }

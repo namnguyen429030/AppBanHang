@@ -1,4 +1,5 @@
 using AppBanHang.Models;
+using AppBanHang.ViewModels;
 using AppBanHang.ViewModels.Windows;
 using AppBanHang.Views.Windows;
 using Avalonia;
@@ -23,15 +24,21 @@ namespace AppBanHang
         {
             var services = new ServiceCollection();
             services.AddDbContext<ShopManagementAppContext>();
+            services.AddSingleton<IScreen, ScreenService>();
+            services.AddViewModels();
+            services.AddRepositories();
+            services.AddServices();
 
             var serviceProvider = services.BuildServiceProvider();
+            services.AddSingleton(serviceProvider);
 
-            var dbContext = serviceProvider.GetRequiredService<ShopManagementAppContext>();
+            var vm = serviceProvider.GetService<MainWindowViewModel>();
+
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow(dbContext)
+                desktop.MainWindow = new MainWindow(serviceProvider)
                 {
-                    DataContext = new MainWindowViewModel(dbContext),
+                    DataContext = vm
                 };
             }
             base.OnFrameworkInitializationCompleted();

@@ -5,18 +5,20 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using Microsoft.Extensions.DependencyInjection;
 using MsBox.Avalonia;
 using ReactiveUI;
+using System;
 using System.Reactive.Disposables;
 
 namespace AppBanHang.Views.Windows
 {
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-        public MainWindow(ShopManagementAppContext context)
+        public MainWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            ViewModel = new(context);
+            ViewModel = serviceProvider.GetService<MainWindowViewModel>();
             this.WhenActivated(disposables =>
             {
                 this.OneWayBind(ViewModel, x => x.Router, x => x.RoutedViewHost.Router)
@@ -33,7 +35,7 @@ namespace AppBanHang.Views.Windows
                     .DisposeWith(disposables);
             });
         }
-        public void LoseAllFocus(object? sender, PointerPressedEventArgs args)
+        private void LoseAllFocus(object? sender, PointerPressedEventArgs args)
         {
             var mainGrid = sender as Grid;
             if (mainGrid != null)

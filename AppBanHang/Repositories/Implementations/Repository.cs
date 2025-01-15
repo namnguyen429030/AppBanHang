@@ -4,10 +4,10 @@ namespace AppBanHang.Repositories.Implementations
 {
     public abstract class Repository
     {
-        protected readonly ShopManagementAppContext _shopManagementAppContext;
+        protected readonly ShopManagementAppContext shopManagementAppContext;
         protected Repository(ShopManagementAppContext shopManagementAppContext)
         {
-            _shopManagementAppContext = shopManagementAppContext;
+            this.shopManagementAppContext = shopManagementAppContext;
         }
 
     }

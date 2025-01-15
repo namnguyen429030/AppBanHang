@@ -9,7 +9,6 @@ namespace AppBanHang.ViewModels.Views
 {
     public class PaymentViewModel : RoutableViewModelBase
     {
-        private readonly ShopManagementAppContext _context;
         private ObservableCollection<Product>? _products;
         public ObservableCollection<Product>? Products
         {
@@ -17,12 +16,11 @@ namespace AppBanHang.ViewModels.Views
             set => this.RaiseAndSetIfChanged(ref _products, value);
         }
         public ReactiveCommand<Unit, Unit> AddPaymentCommand { get; }
-        public PaymentViewModel(IScreen hostScreen, ShopManagementAppContext context) : base(hostScreen)
+        public PaymentViewModel(IScreen hostScreen) : base(hostScreen)
         {
-            _context = context;
-            Products = new(_context.Products);
             AddPaymentCommand = ReactiveCommand.CreateFromTask(AddPayment);
         }
+
 
         private async Task AddPayment()
         {
