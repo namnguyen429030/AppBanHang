@@ -4,6 +4,8 @@
 	<system:Double x:Key="NavigationButtonWidth">200</system:Double>
 	<system:Double x:Key="NavigationButtonHeight">80</system:Double>
 	<system:Double x:Key="NavigationButtonFontSize">30</system:Double>
+
+	<system:Double x:Key="SiderComponentsSpacing">15</system:Double>
 	<system:Double x:Key="NavigationButtonsSpacing">50</system:Double>
 
 	<system:Double x:Key="KeycapWidth">100</system:Double>

@@ -27,6 +27,10 @@ namespace AppBanHang.Views
 
         private void SelectProduct(object? sender, RoutedEventArgs args)
         {
+            if(NumberInput != null)
+            {
+                NumberInput.IsEnabled = true;
+            }
             ComponentsHelper.SetButtonsCondition(true, AddPaymentButton, ConfirmPaymentButton, CancelPaymentButton);
         }
     }

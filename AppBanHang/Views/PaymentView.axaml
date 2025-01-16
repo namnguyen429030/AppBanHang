@@ -22,14 +22,14 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate DataType="{x:Type m:Product}">
-					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="{StaticResource ItemBoxWidth}" Height="{StaticResource ItemBoxHeight}">
 						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
 					</Border>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
 		<StackPanel Grid.Column="1" Spacing="15" HorizontalAlignment="Center">
-			<TextBlock Text="Thanh toán" FontSize="{StaticResource ViewTitleFontSize}" FontWeight="Bold"/>
+			<TextBlock Text="Thanh toán" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
 			<DataGrid ItemsSource=""
 					  AutoGenerateColumns="True"
 					  IsReadOnly="True"
@@ -38,7 +38,7 @@
 					  BorderBrush="Gray">
 				
 			</DataGrid>
-			<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="15">
+			<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="{StaticResource SiderComponentsSpacing}">
 				<StackPanel.Styles>
 					<Style Selector="TextBlock">
 						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
@@ -49,11 +49,14 @@
 						<Setter Property="HorizontalContentAlignment" Value="Center"/>
 					</Style>
 				</StackPanel.Styles>
-				<TextBlock Text="Số lượng"/>
-				<components:TouchScreenNumericInput x:Name="numberInput"/>
-				<Button x:Name="addPaymentBtn" Content="Thêm" Command="{Binding AddPaymentCommand}" IsEnabled="False"/>
-				<Button x:Name="cancelPaymentBtn" Content="Hủy đơn" IsEnabled="False" Background="Red"/>
-				<Button x:Name="confirmPaymentBtn" Content="Xác nhận đơn" IsEnabled="False"/>
+				<TextBlock Text="Số lượng" Margin="15, 0, 0, 0"/>
+				<components:TouchScreenNumericInput x:Name="numberInput" IsEnabled="False"/>
+				<StackPanel Orientation="Vertical">
+					<Button x:Name="addPaymentBtn" Content="Thêm" Command="{Binding AddPaymentCommand}" IsEnabled="False"/>
+					<Button x:Name="cancelPaymentBtn" Content="Hủy đơn" IsEnabled="False" Background="Red"/>
+					<Button x:Name="confirmPaymentBtn" Content="Xác nhận đơn" IsEnabled="False"/>
+					<Button x:Name="checkPaymentStatusBtn" Content="Xác nhận thanh toán" IsEnabled="False"/>
+				</StackPanel>
 			</StackPanel>
 		</StackPanel>
 	</Grid>

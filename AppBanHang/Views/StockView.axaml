@@ -22,7 +22,7 @@
 			</ListBox.ItemsPanel>
 			<ListBox.ItemTemplate>
 				<DataTemplate DataType="{x:Type m:Product}">
-					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200">
+					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="{StaticResource ItemBoxWidth}" Height="{StaticResource ItemBoxHeight}">
 						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
 					</Border>
 				</DataTemplate>
@@ -31,15 +31,27 @@
 		<StackPanel Grid.Column="1" Spacing="15" HorizontalAlignment="Center">
 			<StackPanel.Styles>
 				<Style Selector="TextBlock">
-					<Setter Property="FontSize" Value="40"/>
-					<Setter Property="FontWeight" Value="Bold"/>
+					<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
 				</Style>
-				<Style Selector="Button">
-					<Setter Property="FontSize" Value="40"/>
+				<Style Selector="StackPanel > Button">
+					<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+					<Setter Property="Width" Value="350"/>
+					<Setter Property="HorizontalContentAlignment" Value="Center"/>
 				</Style>
 			</StackPanel.Styles>
-			<TextBlock Text="Kho"/>
-			<Button></Button>
+			<TextBlock Text="Kho" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
+			<TextBlock Text="Tên sản phẩm" Margin="15, 0, 0, 0"/>
+			<components:TouchScreenTextInput/>
+			<TextBlock Text="Đơn giá" Margin="15, 0, 0, 0"/>
+			<components:TouchScreenTextInput/>
+			<TextBlock Text="Số lượng" Margin="15, 0, 0, 0"/>
+			<components:TouchScreenNumericInput/>
+			<TextBlock Text="Ảnh sản phẩm" Margin="15, 0, 0, 0"/>
+			<StackPanel Orientation="Vertical">
+				<Button x:Name="addProductBtn" Content="Thêm sản phẩm" IsEnabled="False"/>
+				<Button x:Name="deleteProductBtn" Content="Xóa sản phẩm" IsEnabled="False" Background="Red"/>
+				<Button x:Name="updateProductBtn" Content="Cập nhật sản phẩm" IsEnabled="False"/>
+			</StackPanel>
 		</StackPanel>
 	</Grid>
 
