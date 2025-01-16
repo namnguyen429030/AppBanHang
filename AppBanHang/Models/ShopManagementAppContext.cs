@@ -46,7 +46,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_BankAccount_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.AccountNo).HasColumnName("account_no");
             entity.Property(e => e.Alias).HasColumnName("alias");
@@ -65,7 +65,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Customer_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.PhoneNumber).HasColumnName("phone_number");
@@ -78,7 +78,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Order_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.IsReceived)
@@ -131,7 +131,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_PaymentMethod_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.IconAddress).HasColumnName("icon_address");
             entity.Property(e => e.Name).HasColumnName("name");
@@ -144,7 +144,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Product_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.ImageAddress).HasColumnName("image_address");
             entity.Property(e => e.Instock)
@@ -168,7 +168,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Receipt_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedDate).HasColumnName("created_date");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
@@ -218,7 +218,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.UserName, "IX_User_user_name").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("id");
             entity.Property(e => e.Alias).HasColumnName("alias");
             entity.Property(e => e.ApiKey).HasColumnName("api_key");
