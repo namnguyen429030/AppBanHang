@@ -19,8 +19,6 @@ public partial class ShopManagementAppContext : DbContext
 
     public virtual DbSet<Customer> Customers { get; set; }
 
-    public virtual DbSet<CustomerOrder> CustomerOrders { get; set; }
-
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<OrderProduct> OrderProducts { get; set; }
@@ -48,7 +46,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_BankAccount_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.AccountNo).HasColumnName("account_no");
             entity.Property(e => e.Alias).HasColumnName("alias");
@@ -67,32 +65,10 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Customer_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.PhoneNumber).HasColumnName("phone_number");
-        });
-
-        modelBuilder.Entity<CustomerOrder>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("CustomerOrder");
-
-            entity.HasIndex(e => e.CustomerId, "IX_CustomerOrder_customer_id").IsUnique();
-
-            entity.HasIndex(e => e.OrderId, "IX_CustomerOrder_order_id").IsUnique();
-
-            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
-
-            entity.HasOne(d => d.Customer).WithOne()
-                .HasForeignKey<CustomerOrder>(d => d.CustomerId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            entity.HasOne(d => d.Order).WithOne()
-                .HasForeignKey<CustomerOrder>(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -102,8 +78,9 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Order_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
+            entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.IsReceived)
                 .HasDefaultValueSql("'0'")
                 .HasColumnName("is_received");
@@ -114,6 +91,10 @@ public partial class ShopManagementAppContext : DbContext
                 .HasColumnName("payment_status");
             entity.Property(e => e.ReceiveDate).HasColumnName("receive_date");
             entity.Property(e => e.Value).HasColumnName("value");
+
+            entity.HasOne(d => d.Customer).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.CustomerId)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             entity.HasOne(d => d.Owner).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.OwnerId)
@@ -150,7 +131,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_PaymentMethod_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.IconAddress).HasColumnName("icon_address");
             entity.Property(e => e.Name).HasColumnName("name");
@@ -163,7 +144,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Product_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.ImageAddress).HasColumnName("image_address");
             entity.Property(e => e.Instock)
@@ -187,7 +168,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.Id, "IX_Receipt_id").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedDate).HasColumnName("created_date");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
@@ -237,7 +218,7 @@ public partial class ShopManagementAppContext : DbContext
             entity.HasIndex(e => e.UserName, "IX_User_user_name").IsUnique();
 
             entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
+                .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Alias).HasColumnName("alias");
             entity.Property(e => e.ApiKey).HasColumnName("api_key");

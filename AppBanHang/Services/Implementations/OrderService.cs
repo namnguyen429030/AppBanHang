@@ -1,5 +1,8 @@
-﻿using AppBanHang.Repositories.Interfaces;
+﻿using AppBanHang.Models;
+using AppBanHang.Repositories.Interfaces;
 using AppBanHang.Services.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AppBanHang.Services.Implementations
 {
@@ -9,6 +12,56 @@ namespace AppBanHang.Services.Implementations
         public OrderService(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
+        }
+
+        public Order AddOrder(Order order)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Order> AddOrderAsync(Order order)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool DeleteOrder(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> DeleteOrderAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Order> GetAllOrdersByUserId(int userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IEnumerable<Order>> GetAllOrdersByUserIdAsync(int userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Order GetOrderById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Order> GetOrderByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Order UpdateOrder(int id, Order order)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Order> UpdateOrderAsync(int id, Order order)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

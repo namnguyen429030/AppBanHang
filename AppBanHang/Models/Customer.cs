@@ -11,5 +11,7 @@ public partial class Customer
 
     public string? PhoneNumber { get; set; }
 
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
     public virtual ICollection<Receipt> Receipts { get; set; } = new List<Receipt>();
 }

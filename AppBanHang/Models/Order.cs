@@ -19,5 +19,9 @@ public partial class Order
 
     public int Value { get; set; }
 
+    public int CustomerId { get; set; }
+
+    public virtual Customer Customer { get; set; } = null!;
+
     public virtual User Owner { get; set; } = null!;
 }

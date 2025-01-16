@@ -1,5 +1,8 @@
-﻿using AppBanHang.Repositories.Interfaces;
+﻿using AppBanHang.Models;
+using AppBanHang.Repositories.Interfaces;
 using AppBanHang.Services.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AppBanHang.Services.Implementations
 {
@@ -9,6 +12,56 @@ namespace AppBanHang.Services.Implementations
         public ReceiptInfoService(IReceiptInfoRepository receiptInfoRepository)
         {
             _receiptInfoRepository = receiptInfoRepository;
+        }
+
+        public ReceiptInfo AddReceiptInfo(ReceiptInfo receiptInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ReceiptInfo> AddReceiptInfoAsync(ReceiptInfo receiptInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool DeleteReceiptInfo(int reReceiptId, int productId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> DeleteReceiptInfoAsync(int receiptId, int productId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<ReceiptInfo> GetAllReceiptInfosByReceiptId(int receiptId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<IEnumerable<ReceiptInfo>> GetAllReceiptInfosByReceiptIdAsync(int receiptId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ReceiptInfo GetReceiptInfo(int receiptId, int productId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ReceiptInfo> GetReceiptInfoAsync(int receiptId, int productId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ReceiptInfo UpdateReceiptInfo(int reReceiptId, int productId, ReceiptInfo receiptInfo)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ReceiptInfo> UpdateReceiptInfoAsync(int receiptId, int productId, ReceiptInfo receiptInfo)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

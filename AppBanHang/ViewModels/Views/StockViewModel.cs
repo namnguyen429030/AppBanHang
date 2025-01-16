@@ -26,7 +26,7 @@ namespace AppBanHang.ViewModels.Views
         public StockViewModel(IScreen hostScreen, IProductService productService) : base(hostScreen)
         {
             _productService = productService;
-            Products = new ObservableCollection<Product>(_productService.GetAllProducts());
+            Products = new ObservableCollection<Product>();
         }
         public ReactiveCommand<Unit, Unit> ChooseProductCommand;
 
