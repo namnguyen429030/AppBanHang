@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace AppBanHang.Utilities
 {
-    public static class ComponentsHelper
+    public static class ControlsHelper
     {
-        public static void SetButtonsCondition(bool status, params Button?[] buttons)
+        public static void SetCondition(bool status, params Control?[] components)
         {
-            foreach (var button in buttons)
+            foreach (var component in components)
             {
-                if (button != null)
+                if (component != null)
                 {
-                    button.IsEnabled = status;
+                    component.IsEnabled = status;
                 }
             }
         }

@@ -9,13 +9,13 @@ namespace AppBanHang.Services.Interfaces
         IEnumerable<BankAccount> GetAllBankAccountByUserId(int userId);
         BankAccount GetBankAccountById(int id);
         BankAccount AddBankAccount(BankAccount bankAccount);
-        BankAccount UpdateBankAccount(int id, BankAccount bankAccount);
+        BankAccount UpdateBankAccount(BankAccount bankAccount);
         bool DeleteBankAccount(int id);
 
         Task<IEnumerable<BankAccount>> GetAllBankAccountByUserIdAsync(int userId);
         Task<BankAccount> GetBankAccountByIdAsync(int id);
         Task<BankAccount> AddBankAccountAsync(BankAccount bankAccount);
-        Task<BankAccount> UpdateBankAccountAsync(int id, BankAccount bankAccount);
+        Task<BankAccount> UpdateBankAccountAsync(BankAccount bankAccount);
         Task<bool> DeleteBankAccountAsync(int id);
     }
 }

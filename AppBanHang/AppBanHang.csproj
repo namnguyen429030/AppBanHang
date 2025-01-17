@@ -36,13 +36,4 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Views\Components\TouchScreenTextInput.axaml.cs">
-      <DependentUpon>TouchScreenTextInput.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Components\TouchScreenNumericInput.axaml.cs">
-      <DependentUpon>TouchScreenNumericInput.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>

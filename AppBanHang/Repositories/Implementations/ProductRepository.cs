@@ -13,12 +13,16 @@ namespace AppBanHang.Repositories.Implementations
 
         public Product Add(Product entity)
         {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Products.Add(entity);
+            shopManagementAppContext.SaveChanges();
+            return entity;
         }
 
-        public Task<Product> AddAsync(Product entity)
+        public async Task<Product> AddAsync(Product entity)
         {
-            throw new System.NotImplementedException();
+            await shopManagementAppContext.Products.AddAsync(entity);
+            await shopManagementAppContext.SaveChangesAsync();
+            return entity;
         }
 
         public bool Delete(Product entity)

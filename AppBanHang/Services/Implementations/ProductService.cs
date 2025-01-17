@@ -16,12 +16,12 @@ namespace AppBanHang.Services.Implementations
 
         public Product AddProduct(Product product)
         {
-            throw new System.NotImplementedException();
+            return _productRepository.Add(product);
         }
 
-        public Task<Product> AddProductAsync(Product product)
+        public async Task<Product> AddProductAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            return await _productRepository.AddAsync(product);
         }
 
         public bool DeleteProduct(int id)
@@ -59,12 +59,12 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Product UpdateProduct(int id, Product product)
+        public Product UpdateProduct(Product product)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Product> UpdateProductAsync(int id, Product product)
+        public Task<Product> UpdateProductAsync(Product product)
         {
             throw new System.NotImplementedException();
         }

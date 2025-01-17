@@ -8,12 +8,12 @@ namespace AppBanHang.Services.Interfaces
     {
         IEnumerable<Product> GetProductsByUserId(int userId);
         Product GetProductById(int id);
-        Product UpdateProduct(int id, Product product);
+        Product UpdateProduct(Product product);
         bool DeleteProduct(int id);
         Product AddProduct(Product product);
         Task<IEnumerable<Product>> GetAllProductsByUserIdAsync(int userId);
         Task<Product> GetProductByIdAsync(int id);
-        Task<Product> UpdateProductAsync(int id, Product product);
+        Task<Product> UpdateProductAsync(Product product);
         Task<bool> DeleteProductAsync(int id);
         Task<Product> AddProductAsync(Product product);
     }

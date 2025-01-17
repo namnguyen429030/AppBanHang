@@ -10,12 +10,12 @@ namespace AppBanHang.Services.Interfaces
         OrderProduct GetOrderProduct(int orderId, int productId);
         OrderProduct AddOrderProduct(OrderProduct orderProduct);
         bool DeleteOrderProduct(int orderId, int productId);
-        OrderProduct UpdateOrderProduct(int orderId, int productId, Product product);
+        OrderProduct UpdateOrderProduct(OrderProduct orderProduct);
 
         Task<IEnumerable<OrderProduct>> GetAllOrderProductByOrderIdAsync(int orderId);
         Task<OrderProduct> GetOrderProductAsync(int orderId, int productId);
         Task<OrderProduct> AddOrderProductAsync(int orderId, Product product);
         Task<bool> DeleteOrderProductAsync(int orderId, int productId);
-        Task<bool> UpdateOrderProductAsync(int orderId, int productId, OrderProduct product);
+        Task<bool> UpdateOrderProductAsync(OrderProduct product);
     }
 }

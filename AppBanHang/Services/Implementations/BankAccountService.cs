@@ -54,12 +54,12 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public BankAccount UpdateBankAccount(int id, BankAccount bankAccount)
+        public BankAccount UpdateBankAccount(BankAccount bankAccount)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<BankAccount> UpdateBankAccountAsync(int id, BankAccount bankAccount)
+        public Task<BankAccount> UpdateBankAccountAsync(BankAccount bankAccount)
         {
             throw new System.NotImplementedException();
         }

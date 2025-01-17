@@ -54,12 +54,12 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Order UpdateOrder(int id, Order order)
+        public Order UpdateOrder(Order order)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<Order> UpdateOrderAsync(int id, Order order)
+        public Task<Order> UpdateOrderAsync(Order order)
         {
             throw new System.NotImplementedException();
         }

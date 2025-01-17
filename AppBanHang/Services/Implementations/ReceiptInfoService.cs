@@ -54,12 +54,12 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public ReceiptInfo UpdateReceiptInfo(int reReceiptId, int productId, ReceiptInfo receiptInfo)
+        public ReceiptInfo UpdateReceiptInfo(ReceiptInfo receiptInfo)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<ReceiptInfo> UpdateReceiptInfoAsync(int receiptId, int productId, ReceiptInfo receiptInfo)
+        public Task<ReceiptInfo> UpdateReceiptInfoAsync(ReceiptInfo receiptInfo)
         {
             throw new System.NotImplementedException();
         }
