@@ -3,6 +3,7 @@ using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
 using AppBanHang.Services.Interfaces;
 using BCrypt.Net;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace AppBanHang.Services.Implementations
@@ -26,6 +27,7 @@ namespace AppBanHang.Services.Implementations
             {
                 throw new InvalidRegistrationException();
             }
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             return _userRepository.Add(user);
         }
 
@@ -36,6 +38,7 @@ namespace AppBanHang.Services.Implementations
             {
                 throw new InvalidRegistrationException();
             }
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             user = await _userRepository.AddAsync(user);
             return user;
         }

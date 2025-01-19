@@ -9,4 +9,18 @@
 	<system:String x:Key="ClientKeyLabel">Client key</system:String>
 	<system:String x:Key="APIKeyLabel">API key</system:String>
 	<system:String x:Key="ChecksumKeyLabel">Checksum key</system:String>
+	<system:String x:Key="StockTitle">Kho</system:String>
+	<system:String x:Key="PaymentTitle">Thanh toán</system:String>
+	<system:String x:Key="OrderTitle">Đặt hàng</system:String>
+	<system:String x:Key="HistoryTitle">Lịch sử</system:String>
+	<system:String x:Key="ProductNameLabel">Tên sản phẩm</system:String>
+	<system:String x:Key="ProductPriceLabel">Đơn giá</system:String>
+	<system:String x:Key="ProductInstockLabel">Số lượng</system:String>
+	<system:String x:Key="ProductImageLabel">Ảnh sản phẩm</system:String>
+	<system:String x:Key="AddImageButton">Thêm ảnh</system:String>
+	<system:String x:Key="EditImageButton">Sửa ảnh</system:String>
+	<system:String x:Key="AddProductButton">Thêm sản phẩm</system:String>
+	<system:String x:Key="UpdateProductButton">Cập nhật sản phẩm</system:String>
+	<system:String x:Key="DeleteProductButton">Xóa sản phẩm</system:String>
+	<system:String x:Key="CancelButton">Hủy</system:String>
 </ResourceDictionary>

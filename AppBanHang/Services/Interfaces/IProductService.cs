@@ -6,7 +6,7 @@ namespace AppBanHang.Services.Interfaces
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetProductsByUserId(int userId);
+        IEnumerable<Product> GetAllProductsByUserId(int userId);
         Product? GetProductById(int id);
         Product UpdateProduct(Product product);
         bool DeleteProduct(int id);

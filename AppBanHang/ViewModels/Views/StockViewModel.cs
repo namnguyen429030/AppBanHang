@@ -5,6 +5,7 @@ using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reactive;
+using System;
 using System.Threading.Tasks;
 
 namespace AppBanHang.ViewModels.Views
@@ -14,6 +15,8 @@ namespace AppBanHang.ViewModels.Views
         private ObservableCollection<Product>? _products;
         private Product _selectedProduct = new();
         private bool _isEditing = false;
+        private bool _isProductImageAvailable = false;
+        private readonly IUserService _userService;
         private readonly IProductService _productService;
 
 
@@ -35,17 +38,29 @@ namespace AppBanHang.ViewModels.Views
             get => _isEditing;
             set => this.RaiseAndSetIfChanged(ref _isEditing, value);
         }
-        public StockViewModel(IScreen hostScreen, IProductService productService) : base(hostScreen)
+        public bool IsProductImageAvailable
+        {
+            get => _isProductImageAvailable;
+            set => this.RaiseAndSetIfChanged(ref _isProductImageAvailable, value);
+        }
+        public StockViewModel(IScreen hostScreen, IProductService productService, IUserService userService) : base(hostScreen)
         {
             _productService = productService;
-            Products = new ObservableCollection<Product>();
+            _userService = userService;
+
+            this.WhenAnyValue(x => x.SelectedProduct.ImageAddress).Subscribe(imageAddress => IsProductImageAvailable = !string.IsNullOrWhiteSpace(imageAddress));
+
             AddProductCommand = ReactiveCommand.CreateFromTask(AddProduct);
             UpdateProductCommand = ReactiveCommand.CreateFromTask(UpdateProduct);
             DeleteProductCommand = ReactiveCommand.CreateFromTask(DeleteProduct);
         }
         private async Task AddProduct()
         {
-            await _productService.AddProductAsync(SelectedProduct);
+            if (_userService.CurrentUser != null)
+            {
+                SelectedProduct.OwnerId = _userService.CurrentUser.Id;
+                await _productService.AddProductAsync(SelectedProduct);
+            }
         }
         private async Task UpdateProduct()
         {

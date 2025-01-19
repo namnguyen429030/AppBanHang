@@ -1,6 +1,7 @@
 ﻿using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AppBanHang.Repositories.Implementations
@@ -56,6 +57,16 @@ namespace AppBanHang.Repositories.Implementations
         }
 
         public Task<IEnumerable<Product>> GetAllAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Product> GetAllByOwnerId(int ownerId)
+        {
+            return shopManagementAppContext.Products.Where(p => p.OwnerId == ownerId);
+        }
+
+        public Task<IEnumerable<Product>> GetAllByOwnerIdAsync(int ownerId)
         {
             throw new System.NotImplementedException();
         }

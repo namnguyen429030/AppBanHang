@@ -39,9 +39,9 @@ namespace AppBanHang.Services.Implementations
             return _productRepository.GetAll();
         }
 
-        public Task<IEnumerable<Product>> GetAllProductsByUserIdAsync(int userId)
+        public async Task<IEnumerable<Product>> GetAllProductsByUserIdAsync(int userId)
         {
-            throw new System.NotImplementedException();
+            return await _productRepository.GetAllByOwnerIdAsync(userId);
         }
 
         public Product GetProductById(int id)
@@ -54,9 +54,9 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Product> GetProductsByUserId(int userId)
+        public IEnumerable<Product> GetAllProductsByUserId(int userId)
         {
-            throw new System.NotImplementedException();
+            return _productRepository.GetAllByOwnerId(userId);
         }
 
         public Product UpdateProduct(Product product)

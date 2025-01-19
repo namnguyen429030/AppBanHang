@@ -7,6 +7,7 @@ namespace AppBanHang.Services.Interfaces
     public interface IUserService
     {
         delegate void ChangeUserHandler(User user);
+        User? CurrentUser { get; }
         event ChangeUserHandler? CurrentUserChanged;
         User Login(string userName, string password);
 
