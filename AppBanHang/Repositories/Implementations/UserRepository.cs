@@ -1,6 +1,8 @@
 ﻿using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AppBanHang.Repositories.Implementations
@@ -13,12 +15,16 @@ namespace AppBanHang.Repositories.Implementations
 
         public User Add(User entity)
         {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Add(entity);
+            shopManagementAppContext.SaveChanges();
+            return entity;
         }
 
-        public Task<User> AddAsync(User entity)
+        public async Task<User> AddAsync(User entity)
         {
-            throw new System.NotImplementedException();
+            await shopManagementAppContext.AddAsync(entity);
+            await shopManagementAppContext.SaveChangesAsync();
+            return entity;
         }
 
         public bool Delete(User entity)
@@ -64,6 +70,16 @@ namespace AppBanHang.Repositories.Implementations
         public Task<User?> GetByKeyAsync(int key)
         {
             throw new System.NotImplementedException();
+        }
+
+        public User? GetByUsername(string username)
+        {
+            return shopManagementAppContext.Users.Where(user => user.UserName == username).FirstOrDefault();
+        }
+
+        public async Task<User?> GetByUsernameAsync(string username)
+        {
+            return await shopManagementAppContext.Users.Where(user => user.UserName == username).FirstOrDefaultAsync();
         }
 
         public User? Update(User entity)

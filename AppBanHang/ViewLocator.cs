@@ -21,6 +21,10 @@ namespace AppBanHang
                     return new OrderView();
                 case PaymentViewModel:
                     return new PaymentView();
+                case LoginViewModel:
+                    return new LoginView();
+                case RegistrationViewModel:
+                    return new RegistrationView();
                 default:
                     throw new ArgumentOutOfRangeException(nameof(viewModel));
             }

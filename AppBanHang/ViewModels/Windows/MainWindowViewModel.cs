@@ -1,4 +1,5 @@
 ﻿using AppBanHang.Models;
+using AppBanHang.Services.Interfaces;
 using AppBanHang.ViewModels.Base;
 using AppBanHang.ViewModels.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,21 @@ namespace AppBanHang.ViewModels.Windows
 {
     public class MainWindowViewModel : WindowViewModelBase
     {
+        private readonly IUserService _userService;
+        private readonly HomeViewModel _homeViewModel;
+        private readonly HistoryViewModel _historyViewModel;
+        private readonly OrderViewModel _orderViewModel;
+        private readonly StockViewModel _stockViewModel;
+        private readonly PaymentViewModel _paymentViewModel;
+        private readonly LoginViewModel _loginViewModel;
+
+        private bool _isLoggedIn;
+        public bool IsLoggedIn
+        {
+            get => _isLoggedIn;
+            set => this.RaiseAndSetIfChanged(ref _isLoggedIn, value);
+        }
+
         public ReactiveCommand<Unit, IRoutableViewModel>? GoToHomeView { get; }
         public ReactiveCommand<Unit, IRoutableViewModel>? GoToHistoryView { get; }
         public ReactiveCommand<Unit, IRoutableViewModel>? GoToOrderView { get; }
@@ -17,28 +33,36 @@ namespace AppBanHang.ViewModels.Windows
         public ReactiveCommand<Unit, IRoutableViewModel>? GoToPaymentView { get; }
 
 
-        public MainWindowViewModel(IServiceProvider serviceProvider, IScreen screen) : base(screen)
+        public MainWindowViewModel(HomeViewModel homeViewModel, HistoryViewModel historyViewModel, OrderViewModel orderViewModel, 
+                                    StockViewModel stockViewModel, PaymentViewModel paymentViewModel, LoginViewModel loginViewModel, 
+                                    IScreen screen, IUserService userService) : base(screen)
         {
-            IRoutableViewModel? homeViewModel = serviceProvider.GetService<HomeViewModel>();
-            IRoutableViewModel? historyViewModel = serviceProvider.GetService<HistoryViewModel>();
-            IRoutableViewModel? orderViewModel = serviceProvider.GetService<OrderViewModel>();
-            IRoutableViewModel? stockViewModel = serviceProvider.GetService<StockViewModel>();
-            IRoutableViewModel? paymentViewModel = serviceProvider.GetService<PaymentViewModel>();
+            _userService = userService;
+            _homeViewModel = homeViewModel;
+            _historyViewModel = historyViewModel;
+            _orderViewModel = orderViewModel;
+            _stockViewModel = stockViewModel;
+            _paymentViewModel = paymentViewModel;
+            _loginViewModel = loginViewModel;
 
-            if (homeViewModel != null && historyViewModel != null && orderViewModel != null && stockViewModel != null && paymentViewModel != null)
-            {
-                Router.Navigate.Execute(homeViewModel);
+            Router.Navigate.Execute(_loginViewModel);
 
-                GoToHomeView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(homeViewModel));
+            GoToHomeView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(_homeViewModel));
 
-                GoToHistoryView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(historyViewModel));
+            GoToHistoryView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(_historyViewModel));
 
-                GoToOrderView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(orderViewModel));
+            GoToOrderView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(_orderViewModel));
 
-                GoToStockView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(stockViewModel));
+            GoToStockView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(_stockViewModel));
 
-                GoToPaymentView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(paymentViewModel));
-            }
+            GoToPaymentView = ReactiveCommand.CreateFromObservable(() => Router.Navigate.Execute(_paymentViewModel));
+
+            _userService.CurrentUserChanged += OnCurrentUserChanged;
+        }
+        private void OnCurrentUserChanged(User user)
+        {
+            IsLoggedIn = user != null;
+            Router.Navigate.Execute(_homeViewModel);
         }
     }
 }

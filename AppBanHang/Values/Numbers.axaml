@@ -6,18 +6,17 @@
 	<system:Double x:Key="NavigationButtonFontSize">30</system:Double>
 
 	<system:Double x:Key="SiderComponentsSpacing">15</system:Double>
+	<system:Double x:Key="LoginComponentsSpacing">15</system:Double>
 	<system:Double x:Key="NavigationButtonsSpacing">50</system:Double>
-
-	<system:Double x:Key="KeycapWidth">100</system:Double>
-	<system:Double x:Key="KeycapHeight">100</system:Double>
-	<system:Double x:Key="NumpadWidth">80</system:Double>
-	<system:Double x:Key="NumpadHeight">80</system:Double>
 
 	<system:Double x:Key="ItemBoxWidth">200</system:Double>
 	<system:Double x:Key="ItemBoxHeight">200</system:Double>
 
 	<system:Double x:Key="ViewTitleFontSize">40</system:Double>
 	<system:Double x:Key="ViewContentFontSize">25</system:Double>
-	<system:Double x:Key="NumpadButtonFontSize">50</system:Double>
-	<system:Double x:Key="KeyboardButtonFontSize">70</system:Double>
+	<system:Double x:Key="LoginTextBoxWidth">400</system:Double>
+	<system:Double x:Key="LoginTextBoxHeight">60</system:Double>
+	<system:Double x:Key="SiderTextBoxWidth">300</system:Double>
+	<system:Double x:Key="LoginButtonWidth">250</system:Double>
+	<system:Double x:Key="LoginButtonHeight">50</system:Double>
 </ResourceDictionary>

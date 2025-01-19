@@ -1,4 +1,12 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:system="clr-namespace:System;assembly=System.Runtime">
+	<system:String x:Key="LoginTitle">Đăng nhập</system:String>
+	<system:String x:Key="RegistrationTitle">Đăng ký</system:String>
+	<system:String x:Key="UsernameLabel">Tên đăng nhập</system:String>
+	<system:String x:Key="PasswordLabel">Mật khẩu</system:String>
+	<system:String x:Key="AliasLabel">Tên hiển thị</system:String>
+	<system:String x:Key="ClientKeyLabel">Client key</system:String>
+	<system:String x:Key="APIKeyLabel">API key</system:String>
+	<system:String x:Key="ChecksumKeyLabel">Checksum key</system:String>
 </ResourceDictionary>

@@ -1,6 +1,8 @@
-﻿using AppBanHang.Models;
+﻿using AppBanHang.Exceptions;
+using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
 using AppBanHang.Services.Interfaces;
+using BCrypt.Net;
 using System.Threading.Tasks;
 
 namespace AppBanHang.Services.Implementations
@@ -12,15 +14,30 @@ namespace AppBanHang.Services.Implementations
         {
             _userRepository = userRepository;
         }
+        private User? _currentUser;
 
+        public event IUserService.ChangeUserHandler? CurrentUserChanged;
+
+        public User? CurrentUser => _currentUser;
         public User AddUser(User user)
         {
-            throw new System.NotImplementedException();
+            var duplicateUsername = GetUserByUserName(user.UserName);
+            if(duplicateUsername != null)
+            {
+                throw new InvalidRegistrationException();
+            }
+            return _userRepository.Add(user);
         }
 
-        public Task<User> AddUserAsync(User user)
+        public async Task<User> AddUserAsync(User user)
         {
-            throw new System.NotImplementedException();
+            var duplicateUsername = await GetUserByUserNameAsync(user.UserName);
+            if (duplicateUsername != null)
+            {
+                throw new InvalidRegistrationException();
+            }
+            user = await _userRepository.AddAsync(user);
+            return user;
         }
 
         public bool DeleteUser(int id)
@@ -43,14 +60,13 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public User GetUserByUserName(string userName)
+        public User? GetUserByUserName(string userName)
         {
-            throw new System.NotImplementedException();
+            return _userRepository.GetByUsername(userName);
         }
-
-        public Task<User> GetUserByUserNameAsync(string username)
+        public async Task<User?> GetUserByUserNameAsync(string username)
         {
-            throw new System.NotImplementedException();
+            return await _userRepository.GetByUsernameAsync(username);
         }
 
         public User UpdateUser(User user)
@@ -61,6 +77,38 @@ namespace AppBanHang.Services.Implementations
         public Task<User> UpdateUserAsync(User user)
         {
             throw new System.NotImplementedException();
+        }
+
+        public User Login(string userName, string password)
+        {
+            var searchedUser = GetUserByUserName(userName);
+            if(searchedUser == null)
+            {
+                throw new InvalidLoginException();
+            }
+            if(!BCrypt.Net.BCrypt.Verify(password, searchedUser.Password))
+            {
+                throw new BcryptAuthenticationException();
+            }
+            _currentUser = searchedUser;
+            CurrentUserChanged?.Invoke(_currentUser);
+            return searchedUser;
+        }
+
+        public async Task<User> LoginAsync(string userName, string password)
+        {
+            var searchedUser = await GetUserByUserNameAsync(userName);
+            if (searchedUser == null)
+            {
+                throw new InvalidLoginException();
+            }
+            if (!BCrypt.Net.BCrypt.Verify(password, searchedUser.Password))
+            {
+                throw new BcryptAuthenticationException();
+            }
+            _currentUser = searchedUser;
+            CurrentUserChanged?.Invoke(_currentUser);
+            return searchedUser;
         }
     }
 }

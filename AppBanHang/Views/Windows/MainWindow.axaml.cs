@@ -15,6 +15,10 @@ namespace AppBanHang.Views.Windows
 {
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
+        public MainWindow()
+        {
+
+        }
         public MainWindow(IServiceProvider serviceProvider)
         {
             InitializeComponent();

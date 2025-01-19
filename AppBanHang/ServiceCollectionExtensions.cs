@@ -35,6 +35,7 @@ namespace AppBanHang
             collection.TryAddTransient<OrderViewModel>();
             collection.TryAddTransient<PaymentViewModel>();
             collection.TryAddTransient<StockViewModel>();
+            collection.TryAddTransient<LoginViewModel>();
         }
     }
 }

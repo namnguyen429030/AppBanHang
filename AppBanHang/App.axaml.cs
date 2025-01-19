@@ -31,7 +31,7 @@ namespace AppBanHang
 
             var serviceProvider = services.BuildServiceProvider();
             services.AddSingleton(serviceProvider);
-
+            
             var vm = serviceProvider.GetService<MainWindowViewModel>();
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

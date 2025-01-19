@@ -38,8 +38,8 @@
 					<Setter Property="HorizontalContentAlignment" Value="Center"/>
 				</Style>
 				<Style Selector="TextBox">
-					<Setter Property="Width" Value="300"/>
-					<Setter Property="FontSize" Value="25"/>
+					<Setter Property="Width" Value="{StaticResource SiderTextBoxWidth}"/>
+					<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
 				</Style>
 			</StackPanel.Styles>
 			<TextBlock Text="Kho" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>

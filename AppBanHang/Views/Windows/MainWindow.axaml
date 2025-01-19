@@ -31,12 +31,12 @@
 						<Setter Property="Background" Value="{StaticResource NavigationButtonColor}"/>
 					</Style>
 				</StackPanel.Styles>
-				<Button x:Name="homeBtn" Content="Trang chủ"></Button>
-				<Button x:Name="stockBtn" Content="Kho"></Button>
-				<Button x:Name="orderBtn" Content="Đặt hàng"></Button>
-				<Button x:Name="historyBtn" Content="Lịch sử"></Button>
-				<Button x:Name="paymentBtn" Content="Thanh toán"></Button>
-				<Button x:Name="quitBtn" Content="Thoát" Click="QuitCommand"></Button>
+				<Button x:Name="homeBtn" Content="Trang chủ" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="stockBtn" Content="Kho" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="orderBtn" Content="Đặt hàng" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="historyBtn" Content="Lịch sử" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="paymentBtn" Content="Thanh toán" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="quitBtn" Content="Thoát" Click="QuitCommand" Background="{StaticResource QuitButtonColor}"></Button>
 			</StackPanel>
 		</ScrollViewer>
 		<rxui:RoutedViewHost
