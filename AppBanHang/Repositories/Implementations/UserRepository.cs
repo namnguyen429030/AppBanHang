@@ -27,22 +27,22 @@ namespace AppBanHang.Repositories.Implementations
             return entity;
         }
 
-        public bool Delete(User entity)
+        public void Delete(User entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(int key)
+        public void Delete(int key)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(User entity)
+        public Task DeleteAsync(User entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(int key)
+        public Task DeleteAsync(int key)
         {
             throw new System.NotImplementedException();
         }
@@ -82,12 +82,12 @@ namespace AppBanHang.Repositories.Implementations
             return await shopManagementAppContext.Users.Where(user => user.UserName == username).FirstOrDefaultAsync();
         }
 
-        public User? Update(User entity)
+        public User Update(User entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User?> UpdateAsync(User entity)
+        public Task<User> UpdateAsync(User entity)
         {
             throw new System.NotImplementedException();
         }

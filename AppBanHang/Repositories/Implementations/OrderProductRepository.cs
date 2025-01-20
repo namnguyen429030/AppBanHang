@@ -21,22 +21,22 @@ namespace AppBanHang.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(OrderProduct entity)
+        public void Delete(OrderProduct entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(int key)
+        public void Delete(int key)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(OrderProduct entity)
+        public Task DeleteAsync(OrderProduct entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(int key)
+        public Task DeleteAsync(int key)
         {
             throw new System.NotImplementedException();
         }
@@ -66,12 +66,12 @@ namespace AppBanHang.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public OrderProduct? Update(OrderProduct entity)
+        public OrderProduct Update(OrderProduct entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<OrderProduct?> UpdateAsync(OrderProduct entity)
+        public Task<OrderProduct> UpdateAsync(OrderProduct entity)
         {
             throw new System.NotImplementedException();
         }

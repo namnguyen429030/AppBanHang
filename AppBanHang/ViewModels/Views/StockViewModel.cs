@@ -11,6 +11,7 @@ using System.Reactive.Linq;
 using System.Diagnostics;
 using Avalonia.Media.Imaging;
 using AppBanHang.Utilities;
+using System.Linq;
 
 namespace AppBanHang.ViewModels.Views
 {
@@ -134,6 +135,7 @@ namespace AppBanHang.ViewModels.Views
             SetProductImageCommand = ReactiveCommand.CreateFromTask(SetProductImage);
 
             _userService.CurrentUserChanged += OnCurrentUserChanged;
+            _productService.ProductUpdated += OnProductUpdated;
         }
         private async Task AddProduct()
         {
@@ -159,14 +161,11 @@ namespace AppBanHang.ViewModels.Views
         }
         private async Task UpdateProduct()
         {
-            Product updatedProduct = new ();
-            updatedProduct.Name = EnteredProductName;
-            updatedProduct.ImageAddress= EnteredProductImageAddress;
-            updatedProduct.Price = int.Parse(EnteredProductPrice);
-            updatedProduct.Instock= int.Parse(EnteredProductInstock);
-            updatedProduct.OwnerId = SelectedProduct.OwnerId;
-            updatedProduct.Id = SelectedProduct.Id;
-            await _productService.UpdateProductAsync(updatedProduct);
+            SelectedProduct.Name = EnteredProductName;
+            SelectedProduct.ImageAddress= EnteredProductImageAddress;
+            SelectedProduct.Price = int.Parse(EnteredProductPrice);
+            SelectedProduct.Instock= int.Parse(EnteredProductInstock);
+            await _productService.UpdateProductAsync(SelectedProduct);
         }
         private async Task DeleteProduct()
         {
@@ -182,6 +181,15 @@ namespace AppBanHang.ViewModels.Views
             if(user != null)
             {
                 Products = new(_productService.GetAllProductsByUserId(user.Id));
+            }
+        }
+        private void OnProductUpdated(Product product)
+        {
+            var searchedProduct = Products.FirstOrDefault(p => p.Id == product.Id);
+            if (searchedProduct != null)
+            {
+                var index = Products.IndexOf(searchedProduct);
+                Products[index] = product;
             }
         }
         private enum StockViewState

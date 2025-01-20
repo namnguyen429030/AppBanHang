@@ -9,6 +9,11 @@ namespace AppBanHang.Services.Implementations
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
+
+        public event IProductService.ProductsUpdatedHandler? ProductUpdated;
+        public event IProductService.ProductsUpdatedHandler? ProductDeleted;
+        public event IProductService.ProductsUpdatedHandler? ProductAdded;
+
         public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
@@ -16,22 +21,26 @@ namespace AppBanHang.Services.Implementations
 
         public Product AddProduct(Product product)
         {
-            return _productRepository.Add(product);
+            var newProduct = _productRepository.Add(product);
+            ProductAdded?.Invoke(newProduct);
+            return newProduct;
         }
 
         public async Task<Product> AddProductAsync(Product product)
         {
-            return await _productRepository.AddAsync(product);
+            var newProduct = await _productRepository.AddAsync(product);
+            ProductUpdated?.Invoke(newProduct);
+            return newProduct;
         }
 
         public bool DeleteProduct(int id)
         {
-            throw new System.NotImplementedException();
+            return _productRepository.Delete(id);
         }
 
-        public Task<bool> DeleteProductAsync(int id)
+        public async Task<bool> DeleteProductAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _productRepository.DeleteAsync(id);
         }
 
         public IEnumerable<Product> GetAllProducts()
@@ -44,14 +53,14 @@ namespace AppBanHang.Services.Implementations
             return await _productRepository.GetAllByOwnerIdAsync(userId);
         }
 
-        public Product GetProductById(int id)
+        public Product? GetProductById(int id)
         {
-            throw new System.NotImplementedException();
+            return _productRepository.GetByKey(id);
         }
 
-        public Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product?> GetProductByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _productRepository.GetByKeyAsync(id);
         }
 
         public IEnumerable<Product> GetAllProductsByUserId(int userId)
@@ -59,14 +68,26 @@ namespace AppBanHang.Services.Implementations
             return _productRepository.GetAllByOwnerId(userId);
         }
 
-        public Product UpdateProduct(Product product)
+        public Product? UpdateProduct(Product product)
         {
-            throw new System.NotImplementedException();
+            if (GetProductById(product.Id) == null)
+            {
+                return null;
+            }
+            var newProduct = _productRepository.Update(product);
+            ProductUpdated?.Invoke(newProduct);
+            return newProduct;
         }
 
-        public async Task<Product> UpdateProductAsync(Product product)
+        public async Task<Product?> UpdateProductAsync(Product product)
         {
-            return await _productRepository.UpdateAsync(product);
+            if (await GetProductByIdAsync(product.Id) == null)
+            {
+                return null;
+            }
+            var newProduct = await _productRepository.UpdateAsync(product);
+            ProductUpdated?.Invoke(newProduct);
+            return newProduct;
         }
     }
 }

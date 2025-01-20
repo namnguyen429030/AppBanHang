@@ -1,5 +1,6 @@
 ﻿using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,22 +27,21 @@ namespace AppBanHang.Repositories.Implementations
             return entity;
         }
 
-        public bool Delete(Product entity)
+        public void Delete(Product entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(int key)
+        public void Delete(int key)
+        {
+        }
+
+        public Task DeleteAsync(Product entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(Product entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(int key)
+        public Task DeleteAsync(int key)
         {
             throw new System.NotImplementedException();
         }
@@ -73,22 +73,26 @@ namespace AppBanHang.Repositories.Implementations
 
         public Product? GetByKey(int key)
         {
-            throw new System.NotImplementedException();
+            return shopManagementAppContext.Products.FirstOrDefault(p => p.Id == key);
         }
 
         public Task<Product?> GetByKeyAsync(int key)
         {
-            throw new System.NotImplementedException();
+            return shopManagementAppContext.Products.FirstOrDefaultAsync(p => p.Id == key);
         }
 
-        public Product? Update(Product entity)
+        public Product Update(Product entity)
         {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Products.Update(entity);
+            shopManagementAppContext.SaveChanges();
+            return entity;
         }
 
-        public Task<Product?> UpdateAsync(Product entity)
+        public async Task<Product> UpdateAsync(Product entity)
         {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Products.Update(entity);
+            await shopManagementAppContext.SaveChangesAsync();
+            return entity;
         }
     }
 }

@@ -21,22 +21,22 @@ namespace AppBanHang.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(ReceiptInfo entity)
+        public void Delete(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(int key)
+        public void Delete(int key)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(ReceiptInfo entity)
+        public Task DeleteAsync(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(int key)
+        public Task DeleteAsync(int key)
         {
             throw new System.NotImplementedException();
         }
@@ -66,12 +66,12 @@ namespace AppBanHang.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public ReceiptInfo? Update(ReceiptInfo entity)
+        public ReceiptInfo Update(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<ReceiptInfo?> UpdateAsync(ReceiptInfo entity)
+        public Task<ReceiptInfo> UpdateAsync(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }

@@ -22,22 +22,22 @@ namespace AppBanHang.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public bool Delete(BankAccount entity)
+        public void Delete(BankAccount entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(int key)
+        public void Delete(int key)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(BankAccount entity)
+        public Task DeleteAsync(BankAccount entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync(int key)
+        public Task DeleteAsync(int key)
         {
             throw new NotImplementedException();
         }

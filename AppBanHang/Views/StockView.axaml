@@ -69,7 +69,7 @@
 				<StackPanel Orientation="Vertical">
 					<Button x:Name="addProductBtn" Content="Thêm sản phẩm" IsEnabled="{Binding !IsSaving}" Command="{Binding AddProductCommand}"/>
 					<Button x:Name="deleteProductBtn" Content="Xóa sản phẩm" IsEnabled="{Binding IsEditing}" Background="Red"/>
-					<Button x:Name="updateProductBtn" Content="Cập nhật sản phẩm" IsEnabled="{Binding IsEditing}"/>
+					<Button x:Name="updateProductBtn" Content="Cập nhật sản phẩm" IsEnabled="{Binding IsEditing}" Command="{Binding UpdateProductCommand}"/>
 					<Button x:Name="clearBtn" Content="Hủy" IsEnabled="{Binding IsEditing}"/>
 				</StackPanel>
 			</StackPanel>
