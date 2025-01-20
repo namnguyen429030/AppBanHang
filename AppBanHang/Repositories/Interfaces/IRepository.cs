@@ -11,7 +11,7 @@ namespace AppBanHang.Repositories.Interfaces
         TEntity Add(TEntity entity);
         IEnumerable<TEntity> GetAll();
         TEntity? GetByKey(TKey key);
-        TEntity? Update(TEntity entity);
+        TEntity Update(TEntity entity);
         bool Delete(TEntity entity);
         bool Delete(TKey key);
 
@@ -19,7 +19,7 @@ namespace AppBanHang.Repositories.Interfaces
         Task<IEnumerable<TEntity>> GetAllAsync();
 
         Task<TEntity?> GetByKeyAsync(TKey key);
-        Task<TEntity?> UpdateAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(TEntity entity);
         Task<bool> DeleteAsync(TKey key);
     }

@@ -64,9 +64,9 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<Product> UpdateProductAsync(Product product)
+        public async Task<Product> UpdateProductAsync(Product product)
         {
-            throw new System.NotImplementedException();
+            return await _productRepository.UpdateAsync(product);
         }
     }
 }

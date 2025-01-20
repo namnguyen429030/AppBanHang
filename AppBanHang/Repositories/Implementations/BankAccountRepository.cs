@@ -67,12 +67,12 @@ namespace AppBanHang.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public BankAccount? Update(BankAccount entity)
+        public BankAccount Update(BankAccount entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<BankAccount?> UpdateAsync(BankAccount entity)
+        public Task<BankAccount> UpdateAsync(BankAccount entity)
         {
             throw new NotImplementedException();
         }

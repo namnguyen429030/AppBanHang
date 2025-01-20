@@ -12,7 +12,7 @@ namespace AppBanHang.Utilities
     {
         public static async Task<string> SaveFile(byte[] imageContent, string folderName, string fileName)
         {
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             string assetsDirectory = Path.Combine(baseDirectory, folderName);
             if (!Directory.Exists(assetsDirectory))
@@ -25,6 +25,16 @@ namespace AppBanHang.Utilities
             await File.WriteAllBytesAsync(filePath, imageContent);
 
             return filePath;
+        }
+        public static byte[] GetBytesFromPath(string filePath)
+        {
+            using (var stream = File.OpenRead(filePath))
+            {
+                using(var read = new BinaryReader(stream))
+                {
+                    return read.ReadBytes((int)stream.Length);
+                }
+            }
         }
     }
 }
