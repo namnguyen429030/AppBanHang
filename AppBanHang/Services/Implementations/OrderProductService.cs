@@ -59,7 +59,7 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> UpdateOrderProductAsync(OrderProduct orderProduct)
+        public Task<bool> UpdateOrderProductAsync(OrderProduct product)
         {
             throw new System.NotImplementedException();
         }

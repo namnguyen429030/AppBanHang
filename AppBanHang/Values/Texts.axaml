@@ -23,4 +23,10 @@
 	<system:String x:Key="UpdateProductButton">Cập nhật sản phẩm</system:String>
 	<system:String x:Key="DeleteProductButton">Xóa sản phẩm</system:String>
 	<system:String x:Key="CancelButton">Hủy</system:String>
+	<system:String x:Key="AddProductPaymentButton">Thêm vào giỏ</system:String>
+	<system:String x:Key="CancelPaymentButton">Hủy đơn</system:String>
+	<system:String x:Key="ConfirmPaymentButton">Xác nhận đơn</system:String>
+	<system:String x:Key="ConfirmCheckoutButton">Xác nhận thanh toán</system:String>
+	<system:String x:Key="ProductAmountLabel">Số lượng</system:String>
+	<system:String x:Key="UpdateProductPaymentButton">Cập nhật đơn</system:String>
 </ResourceDictionary>

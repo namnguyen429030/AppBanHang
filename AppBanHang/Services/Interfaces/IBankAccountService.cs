@@ -15,7 +15,5 @@ namespace AppBanHang.Services.Interfaces
         Task<IEnumerable<BankAccount>> GetAllBankAccountByUserIdAsync(int userId);
         Task<BankAccount?> GetBankAccountByIdAsync(int id);
         Task<BankAccount> AddBankAccountAsync(BankAccount bankAccount);
-        Task<BankAccount> UpdateBankAccountAsync(BankAccount bankAccount);
-        Task<bool> DeleteBankAccountAsync(int id);
     }
 }

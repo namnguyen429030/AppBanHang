@@ -9,6 +9,9 @@ namespace AppBanHang.Repositories.Implementations
         {
             this.shopManagementAppContext = shopManagementAppContext;
         }
-
+        public void Save()
+        {
+            shopManagementAppContext.SaveChanges();
+        }
     }
 }

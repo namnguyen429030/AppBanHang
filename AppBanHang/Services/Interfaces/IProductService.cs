@@ -17,8 +17,8 @@ namespace AppBanHang.Services.Interfaces
         Product AddProduct(Product product);
         Task<IEnumerable<Product>> GetAllProductsByUserIdAsync(int userId);
         Task<Product?> GetProductByIdAsync(int id);
-        Task<Product?> UpdateProductAsync(Product product);
-        Task<bool> DeleteProductAsync(int id);
         Task<Product> AddProductAsync(Product product);
+        Task<Product> UpdateProductAsync(Product product);
+        Task<bool> DeleteProductAsync(int id);
     }
 }

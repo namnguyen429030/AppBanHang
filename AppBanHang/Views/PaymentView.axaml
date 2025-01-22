@@ -5,7 +5,7 @@
 						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-						  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+						  mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
 						  x:Class="AppBanHang.Views.PaymentView"
 						  x:DataType="vm:PaymentViewModel">
 	<Grid>
@@ -13,50 +13,47 @@
 			<ColumnDefinition Width="*"></ColumnDefinition>
 			<ColumnDefinition Width="350"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<ListBox Grid.Column="0" ItemsSource="{Binding Products}">
+		<ListBox Grid.Column="0" ItemsSource="{Binding Products}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionMode="Single" SelectedItem="{Binding SelectedProduct}" ItemTemplate="{StaticResource ProductTemplate}">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<UniformGrid Columns="3"/>
 				</ItemsPanelTemplate>
 			</ListBox.ItemsPanel>
-			<ListBox.ItemTemplate>
-				<DataTemplate DataType="{x:Type m:Product}">
-					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="{StaticResource ItemBoxWidth}" Height="{StaticResource ItemBoxHeight}">
-						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-					</Border>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
 		</ListBox>
-		<StackPanel Grid.Column="1" Spacing="15" HorizontalAlignment="Center">
-			<TextBlock Text="Thanh toán" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
-			<ListBox>
-				
-			</ListBox>
-			<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="{StaticResource SiderComponentsSpacing}">
-				<StackPanel.Styles>
-					<Style Selector="TextBlock">
-						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
-					</Style>
-					<Style Selector="StackPanel > Button">
-						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
-						<Setter Property="Width" Value="350"/>
-						<Setter Property="HorizontalContentAlignment" Value="Center"/>
-					</Style>
-					<Style Selector="TextBox">
-						<Setter Property="Width" Value="300"></Setter>
-					</Style>
-				</StackPanel.Styles>
-				<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
-					<TextBlock Text="Số lượng" Margin="15, 0, 0, 0"/>
-					<TextBox x:Name="numberTxtBox" IsEnabled="False"/>
-				</StackPanel>
-				<StackPanel Orientation="Vertical">
-					<Button x:Name="addPaymentBtn" Content="Thêm" Command="{Binding AddPaymentCommand}" IsEnabled="False"/>
-					<Button x:Name="cancelPaymentBtn" Content="Hủy đơn" IsEnabled="False" Background="Red"/>
-					<Button x:Name="confirmPaymentBtn" Content="Xác nhận đơn" IsEnabled="False"/>
-					<Button x:Name="checkPaymentStatusBtn" Content="Xác nhận thanh toán" IsEnabled="False"/>
+		<ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+			<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
+				<TextBlock Text="{StaticResource PaymentTitle}" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
+				<ListBox ItemsSource="{Binding CurrentReceiptInfos}" ItemTemplate="{StaticResource ReceiptInfoTemplate}" SelectedItem="{Binding CurrentReceiptInfo}">
+					
+				</ListBox>
+				<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="{StaticResource SiderComponentsSpacing}">
+					<StackPanel.Styles>
+						<Style Selector="TextBlock">
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						</Style>
+						<Style Selector="StackPanel > Button">
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+							<Setter Property="Width" Value="{StaticResource SiderWidth}"/>
+							<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						</Style>
+						<Style Selector="TextBox">
+							<Setter Property="Width" Value="{StaticResource SiderTextBoxWidth}"/>
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						</Style>
+					</StackPanel.Styles>
+					<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
+						<TextBlock Text="{StaticResource ProductAmountLabel}" Margin="15, 0, 0, 0"/>
+						<TextBox x:Name="numberTxtBox" IsEnabled="{Binding IsEditing}" Text="{Binding CurrentProductNumber}"/>
+					</StackPanel>
+					<StackPanel Orientation="Vertical">
+						<Button x:Name="addPaymentBtn" Content="{StaticResource AddProductPaymentButton}" Command="{Binding AddProductToPaymentCommand}" IsEnabled="{Binding IsAdding}"/>
+						<Button x:Name="updatePaymentBtn" Content="{StaticResource UpdateProductPaymentButton}" Command="{Binding AddProductToPaymentCommand}" IsEnabled="{Binding IsUpdating}"/>
+						<Button x:Name="confirmPaymentBtn" Content="{StaticResource ConfirmPaymentButton}" IsEnabled="{Binding IsConfirmable}"/>
+						<Button x:Name="cancelPaymentBtn" Content="{StaticResource CancelPaymentButton}" IsEnabled="{Binding IsConfirmed}" Background="Red"/>
+						<Button x:Name="checkPaymentStatusBtn" Content="{StaticResource ConfirmCheckoutButton}" IsEnabled="{Binding IsConfirmed}"/>
+					</StackPanel>
 				</StackPanel>
 			</StackPanel>
-		</StackPanel>
+		</ScrollViewer>
 	</Grid>
 </rxui:ReactiveUserControl>

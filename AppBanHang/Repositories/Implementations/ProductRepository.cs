@@ -29,21 +29,14 @@ namespace AppBanHang.Repositories.Implementations
 
         public void Delete(Product entity)
         {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Remove(entity);
+            shopManagementAppContext.SaveChanges();
         }
 
-        public void Delete(int key)
+        public async Task DeleteAsync(Product product)
         {
-        }
-
-        public Task DeleteAsync(Product entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteAsync(int key)
-        {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Products.Remove(product);
+            await shopManagementAppContext.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -88,11 +81,11 @@ namespace AppBanHang.Repositories.Implementations
             return entity;
         }
 
-        public async Task<Product> UpdateAsync(Product entity)
+        public async Task<Product> UpdateAsync(Product product)
         {
-            shopManagementAppContext.Products.Update(entity);
+            shopManagementAppContext.Products.Update(product);
             await shopManagementAppContext.SaveChangesAsync();
-            return entity;
+            return product;
         }
     }
 }

@@ -26,21 +26,6 @@ namespace AppBanHang.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public void Delete(int key)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteAsync(ReceiptInfo entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteAsync(int key)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Dispose()
         {
             throw new System.NotImplementedException();
@@ -67,11 +52,6 @@ namespace AppBanHang.Repositories.Implementations
         }
 
         public ReceiptInfo Update(ReceiptInfo entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<ReceiptInfo> UpdateAsync(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }

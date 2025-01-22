@@ -24,7 +24,6 @@ namespace AppBanHang
             collection.TryAddSingleton<IUserService, UserService>();
             collection.TryAddSingleton<IProductService, ProductService>();
             collection.TryAddSingleton<IReceiptService, ReceiptService>();
-            collection.TryAddSingleton<IReceiptInforService, ReceiptInfoService>();
         }
 
         public static void AddViewModels(this IServiceCollection collection)

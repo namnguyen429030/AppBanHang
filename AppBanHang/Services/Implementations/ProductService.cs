@@ -35,12 +35,26 @@ namespace AppBanHang.Services.Implementations
 
         public bool DeleteProduct(int id)
         {
-            return _productRepository.Delete(id);
+            var searchedProduct = _productRepository.GetByKey(id);
+            if(searchedProduct == null)
+            {
+                return false;
+            }
+            _productRepository.Delete(searchedProduct);
+            ProductDeleted?.Invoke(searchedProduct);
+            return true;
         }
 
         public async Task<bool> DeleteProductAsync(int id)
         {
-            return await _productRepository.DeleteAsync(id);
+            var searchProduct = await _productRepository.GetByKeyAsync(id);
+            if(searchProduct == null)
+            {
+                return false;
+            }
+            await _productRepository.DeleteAsync(searchProduct);
+            ProductDeleted?.Invoke(searchProduct);
+            return true;
         }
 
         public IEnumerable<Product> GetAllProducts()

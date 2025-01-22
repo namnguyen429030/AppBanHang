@@ -15,12 +15,10 @@
 				<ResourceInclude Source="/Values/Texts.axaml"/>
 				<ResourceInclude Source="/Values/Colors.axaml"/>
 				<ResourceInclude Source="/Values/Numbers.axaml"/>
+				<ResourceInclude Source="/Values/DataTemplates.axaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
 	<Application.DataTemplates>
-		<DataTemplate DataType="{x:Type m:Product}">
-			
-		</DataTemplate>
 	</Application.DataTemplates>
 </Application>

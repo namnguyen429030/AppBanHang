@@ -10,12 +10,9 @@ namespace AppBanHang.Services.Interfaces
         User? CurrentUser { get; }
         event ChangeUserHandler? CurrentUserChanged;
         User Login(string userName, string password);
-
         Task<User> AddUserAsync(User user);
         Task<User> GetUserByIdAsync(int id);
         Task<User?> GetUserByUserNameAsync(string username);
-        Task<User> UpdateUserAsync(User user);
-        Task<bool> DeleteUserAsync(int id);
         Task<User> LoginAsync(string userName, string password);
     }
 }

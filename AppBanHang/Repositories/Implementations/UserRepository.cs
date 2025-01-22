@@ -32,21 +32,6 @@ namespace AppBanHang.Repositories.Implementations
             throw new System.NotImplementedException();
         }
 
-        public void Delete(int key)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteAsync(User entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteAsync(int key)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Dispose()
         {
             throw new System.NotImplementedException();
@@ -83,11 +68,6 @@ namespace AppBanHang.Repositories.Implementations
         }
 
         public User Update(User entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<User> UpdateAsync(User entity)
         {
             throw new System.NotImplementedException();
         }

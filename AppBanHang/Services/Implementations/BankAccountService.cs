@@ -28,12 +28,6 @@ namespace AppBanHang.Services.Implementations
         {
             throw new System.NotImplementedException();
         }
-
-        public Task<bool> DeleteBankAccountAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public IEnumerable<BankAccount> GetAllBankAccountByUserId(int userId)
         {
             throw new System.NotImplementedException();
@@ -55,11 +49,6 @@ namespace AppBanHang.Services.Implementations
         }
 
         public BankAccount UpdateBankAccount(BankAccount bankAccount)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<BankAccount> UpdateBankAccountAsync(BankAccount bankAccount)
         {
             throw new System.NotImplementedException();
         }

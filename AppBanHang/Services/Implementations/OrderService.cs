@@ -29,11 +29,6 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteOrderAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public IEnumerable<Order> GetAllOrdersByUserId(int userId)
         {
             throw new System.NotImplementedException();
@@ -55,11 +50,6 @@ namespace AppBanHang.Services.Implementations
         }
 
         public Order UpdateOrder(Order order)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<Order> UpdateOrderAsync(Order order)
         {
             throw new System.NotImplementedException();
         }

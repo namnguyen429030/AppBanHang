@@ -1,6 +1,7 @@
 <rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
 						  xmlns:vm="using:AppBanHang.ViewModels.Views"
 						  xmlns:m ="using:AppBanHang.Models"
+						  xmlns:local="using:AppBanHang"
 						  xmlns:rxui="http://reactiveui.net"
 						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,19 +14,12 @@
 			<ColumnDefinition Width="*"></ColumnDefinition>
 			<ColumnDefinition Width="350"></ColumnDefinition>
 		</Grid.ColumnDefinitions>
-		<ListBox Grid.Column="0" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+		<ListBox Grid.Column="0" ItemsSource="{Binding Products}" ItemTemplate="{StaticResource ProductTemplate}" SelectedItem="{Binding SelectedProduct}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<UniformGrid Columns="3"/>
 				</ItemsPanelTemplate>
 			</ListBox.ItemsPanel>
-			<ListBox.ItemTemplate>
-				<DataTemplate DataType="{x:Type m:Product}">
-					<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="{StaticResource ItemBoxWidth}" Height="{StaticResource ItemBoxHeight}">
-						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-					</Border>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
 		</ListBox>
 		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
 			<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
@@ -68,7 +62,7 @@
 				</StackPanel>
 				<StackPanel Orientation="Vertical">
 					<Button x:Name="addProductBtn" Content="Thêm sản phẩm" IsEnabled="{Binding !IsSaving}" Command="{Binding AddProductCommand}"/>
-					<Button x:Name="deleteProductBtn" Content="Xóa sản phẩm" IsEnabled="{Binding IsEditing}" Background="Red"/>
+					<Button x:Name="deleteProductBtn" Content="Xóa sản phẩm" IsEnabled="{Binding IsEditing}" Command="{Binding DeleteProductCommand}" Background="Red"/>
 					<Button x:Name="updateProductBtn" Content="Cập nhật sản phẩm" IsEnabled="{Binding IsEditing}" Command="{Binding UpdateProductCommand}"/>
 					<Button x:Name="clearBtn" Content="Hủy" IsEnabled="{Binding IsEditing}"/>
 				</StackPanel>

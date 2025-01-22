@@ -14,8 +14,6 @@ namespace AppBanHang.Services.Interfaces
 
         Task<IEnumerable<Order>> GetAllOrdersByUserIdAsync(int userId);
         Task<Order?> GetOrderByIdAsync(int id);
-        Task<Order> UpdateOrderAsync(Order order);
         Task<Order> AddOrderAsync(Order order);
-        Task<bool> DeleteOrderAsync(int id);
     }
 }

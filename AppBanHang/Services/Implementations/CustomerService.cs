@@ -29,11 +29,6 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> DeleteCustomerAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public IEnumerable<Customer> GetAllCustomers()
         {
             throw new System.NotImplementedException();
@@ -54,12 +49,7 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Customer UpdateCustomer(int id, Customer customer)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<Customer> UpdateCustomerAsync(int id, Customer customer)
+        public Customer UpdateCustomer(Customer customer)
         {
             throw new System.NotImplementedException();
         }

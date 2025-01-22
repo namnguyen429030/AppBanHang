@@ -27,17 +27,7 @@ namespace AppBanHang.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public void Delete(int key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(BankAccount entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(int key)
+        public Task DeleteAsync(BankAccount bankAccount)
         {
             throw new NotImplementedException();
         }
@@ -72,7 +62,7 @@ namespace AppBanHang.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<BankAccount> UpdateAsync(BankAccount entity)
+        public Task<BankAccount> UpdateAsync(BankAccount bankAccount)
         {
             throw new NotImplementedException();
         }

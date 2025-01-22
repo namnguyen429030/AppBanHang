@@ -20,6 +20,7 @@ namespace AppBanHang.ViewModels.Views
         private ObservableCollection<Product> _products = new();
         private Product _selectedProduct = new();
         private Bitmap? _enteredProductImage;
+        private User? _currentUser;
         private string _enteredProductName = string.Empty;
         private string _enteredProductPrice = "0";
         private string _enteredProductInstock = "0";
@@ -41,17 +42,18 @@ namespace AppBanHang.ViewModels.Views
             get => _selectedProduct;
             set {
                 this.RaiseAndSetIfChanged(ref _selectedProduct, value);
-                EnteredProductName = _selectedProduct.Name;
-                EnteredProductInstock = _selectedProduct.Instock.ToString();
-                EnteredProductPrice = _selectedProduct.Price.ToString();
-                EnteredProductImageAddress = _selectedProduct.ImageAddress;
-                StateSwitch(StockViewState.Editing);
+                OnProductSelected(value);
             }
         }
         public Bitmap? EnteredProductImage
         {
             get => _enteredProductImage;
             set => this.RaiseAndSetIfChanged(ref _enteredProductImage, value);
+        }
+        public User? CurrentUser
+        {
+            get => _currentUser;
+            set => this.RaiseAndSetIfChanged(ref _currentUser, value);
         }
         public string EnteredProductName
         {
@@ -135,7 +137,9 @@ namespace AppBanHang.ViewModels.Views
             SetProductImageCommand = ReactiveCommand.CreateFromTask(SetProductImage);
 
             _userService.CurrentUserChanged += OnCurrentUserChanged;
-            _productService.ProductUpdated += OnProductUpdated;
+            _productService.ProductUpdated += OnProductListUpdated;
+            _productService.ProductDeleted += OnProductListUpdated;
+            _productService.ProductAdded += OnProductListUpdated;
         }
         private async Task AddProduct()
         {
@@ -169,27 +173,41 @@ namespace AppBanHang.ViewModels.Views
         }
         private async Task DeleteProduct()
         {
-            throw new NotImplementedException();
+            await _productService.DeleteProductAsync(SelectedProduct.Id);
         }
         private async Task SetProductImage()
         {
             var fileAddress = await OpenFilePickerInteraction.Handle(Unit.Default);
             EnteredProductImageAddress = fileAddress;
         }
+        private void OnProductSelected(Product? product)
+        {
+            if (product != null)
+            {
+                EnteredProductName = _selectedProduct.Name;
+                EnteredProductInstock = _selectedProduct.Instock.ToString();
+                EnteredProductPrice = _selectedProduct.Price.ToString();
+                EnteredProductImageAddress = _selectedProduct.ImageAddress;
+                StateSwitch(StockViewState.Editing);
+            }
+            else
+            {
+                StateSwitch(StockViewState.Idle);
+            }
+        }
         private void OnCurrentUserChanged(User user)
         {
+            CurrentUser = user;
             if(user != null)
             {
                 Products = new(_productService.GetAllProductsByUserId(user.Id));
             }
         }
-        private void OnProductUpdated(Product product)
+        private void OnProductListUpdated(Product product)
         {
-            var searchedProduct = Products.FirstOrDefault(p => p.Id == product.Id);
-            if (searchedProduct != null)
+            if (CurrentUser != null)
             {
-                var index = Products.IndexOf(searchedProduct);
-                Products[index] = product;
+                Products = new(_productService.GetAllProductsByUserId(CurrentUser.Id));
             }
         }
         private enum StockViewState
