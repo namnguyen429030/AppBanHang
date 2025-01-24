@@ -81,11 +81,11 @@ namespace AppBanHang.Repositories.Implementations
             return entity;
         }
 
-        public async Task<Product> UpdateAsync(Product product)
+        public async Task<Product> UpdateAsync(Product entity)
         {
-            shopManagementAppContext.Products.Update(product);
+            shopManagementAppContext.Products.Update(entity);
             await shopManagementAppContext.SaveChangesAsync();
-            return product;
+            return entity;
         }
     }
 }

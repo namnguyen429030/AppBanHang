@@ -1,5 +1,6 @@
 using AppBanHang.Utilities;
 using AppBanHang.ViewModels.Views;
+using AppBanHang.Views.Windows;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;

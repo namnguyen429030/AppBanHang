@@ -1,7 +1,9 @@
 ﻿using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +30,11 @@ namespace AppBanHang.Repositories.Implementations
         }
 
         public void Delete(User entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteAsync(User entity)
         {
             throw new System.NotImplementedException();
         }
@@ -64,10 +71,23 @@ namespace AppBanHang.Repositories.Implementations
 
         public async Task<User?> GetByUsernameAsync(string username)
         {
-            return await shopManagementAppContext.Users.Where(user => user.UserName == username).FirstOrDefaultAsync();
+            try
+            {
+                return await shopManagementAppContext.Users.Where(user => user.UserName == username).FirstOrDefaultAsync();
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            return null;
         }
 
         public User Update(User entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<User> UpdateAsync(User entity)
         {
             throw new System.NotImplementedException();
         }

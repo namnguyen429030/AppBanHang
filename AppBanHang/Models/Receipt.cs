@@ -24,4 +24,6 @@ public partial class Receipt
     public virtual User Owner { get; set; } = null!;
 
     public virtual PaymentMethod PaymentMethod { get; set; } = null!;
+
+    public virtual ICollection<ReceiptInfo> ReceiptInfos { get; set; } = new List<ReceiptInfo>();
 }

@@ -103,23 +103,23 @@ public partial class ShopManagementAppContext : DbContext
 
         modelBuilder.Entity<OrderProduct>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("OrderProduct");
+            entity.HasKey(e => new { e.ProductId, e.OrderId });
+
+            entity.ToTable("OrderProduct");
 
             entity.HasIndex(e => e.OrderId, "IX_OrderProduct_order_id").IsUnique();
 
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
             entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Discount).HasColumnName("discount");
-            entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.TotalPrice).HasColumnName("total_price");
 
-            entity.HasOne(d => d.Order).WithOne()
+            entity.HasOne(d => d.Order).WithOne(p => p.OrderProduct)
                 .HasForeignKey<OrderProduct>(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            entity.HasOne(d => d.Product).WithMany()
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderProducts)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         });
@@ -190,21 +190,21 @@ public partial class ShopManagementAppContext : DbContext
 
         modelBuilder.Entity<ReceiptInfo>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ReceiptInfo");
+            entity.HasKey(e => new { e.ReceiptId, e.ProductId });
 
+            entity.ToTable("ReceiptInfo");
+
+            entity.Property(e => e.ReceiptId).HasColumnName("receipt_id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.Amount).HasColumnName("amount");
             entity.Property(e => e.Discount).HasColumnName("discount");
-            entity.Property(e => e.ProductId).HasColumnName("product_id");
-            entity.Property(e => e.ReceiptId).HasColumnName("receipt_id");
             entity.Property(e => e.TotalValue).HasColumnName("total_value");
 
-            entity.HasOne(d => d.Product).WithMany()
+            entity.HasOne(d => d.Product).WithMany(p => p.ReceiptInfos)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            entity.HasOne(d => d.Receipt).WithMany()
+            entity.HasOne(d => d.Receipt).WithMany(p => p.ReceiptInfos)
                 .HasForeignKey(d => d.ReceiptId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         });

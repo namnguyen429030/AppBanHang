@@ -70,5 +70,15 @@ namespace AppBanHang.Services.Implementations
         {
             throw new System.NotImplementedException();
         }
+
+        public Receipt UpdateReceipt(Receipt receipt)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Receipt> UpdateReceiptAsync(Receipt receipt)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

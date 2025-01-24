@@ -7,6 +7,7 @@
 
 	<system:Double x:Key="SiderComponentsSpacing">15</system:Double>
 	<system:Double x:Key="SiderWidth">350</system:Double>
+	<system:Double x:Key="SiderReceiptListHeight">150</system:Double>
 	<system:Double x:Key="LoginComponentsSpacing">15</system:Double>
 	<system:Double x:Key="NavigationButtonsSpacing">50</system:Double>
 

@@ -29,4 +29,7 @@
 	<system:String x:Key="ConfirmCheckoutButton">Xác nhận thanh toán</system:String>
 	<system:String x:Key="ProductAmountLabel">Số lượng</system:String>
 	<system:String x:Key="UpdateProductPaymentButton">Cập nhật đơn</system:String>
+	<system:String x:Key="TotalValueLabel">Tổng</system:String>
+	<system:String x:Key="CashPaymentMethod">Tiền mặt</system:String>
+	<system:String x:Key="QRCodePaymentMethod">QR Code</system:String>
 </ResourceDictionary>

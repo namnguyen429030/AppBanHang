@@ -17,5 +17,9 @@ public partial class Product
 
     public int Instock { get; set; }
 
+    public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+
     public virtual User Owner { get; set; } = null!;
+
+    public virtual ICollection<ReceiptInfo> ReceiptInfos { get; set; } = new List<ReceiptInfo>();
 }

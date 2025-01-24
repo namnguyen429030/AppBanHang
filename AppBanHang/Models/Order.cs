@@ -23,5 +23,7 @@ public partial class Order
 
     public virtual Customer Customer { get; set; } = null!;
 
+    public virtual OrderProduct? OrderProduct { get; set; }
+
     public virtual User Owner { get; set; } = null!;
 }

@@ -16,5 +16,8 @@ namespace AppBanHang.Repositories.Interfaces
         Task<TEntity> AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity?> GetByKeyAsync(TKey key);
+        Task<TEntity> UpdateAsync(TEntity entity);
+        Task DeleteAsync(TEntity entity);
+
     }
 }

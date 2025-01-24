@@ -100,7 +100,7 @@ namespace AppBanHang.Services.Implementations
                 return null;
             }
             var newProduct = await _productRepository.UpdateAsync(product);
-            ProductUpdated?.Invoke(newProduct);
+            ProductUpdated?.Invoke(newProduct); 
             return newProduct;
         }
     }

@@ -1,6 +1,8 @@
 ﻿using AppBanHang.Models;
 using AppBanHang.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace AppBanHang.Repositories.Implementations
@@ -13,15 +15,24 @@ namespace AppBanHang.Repositories.Implementations
 
         public ReceiptInfo Add(ReceiptInfo entity)
         {
-            throw new System.NotImplementedException();
+            shopManagementAppContext.Add(entity);
+            shopManagementAppContext.SaveChanges();
+            return entity;
         }
 
-        public Task<ReceiptInfo> AddAsync(ReceiptInfo entity)
+        public async Task<ReceiptInfo> AddAsync(ReceiptInfo entity)
+        {
+            await shopManagementAppContext.AddAsync(entity);
+            await shopManagementAppContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public void Delete(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Delete(ReceiptInfo entity)
+        public Task DeleteAsync(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }
@@ -52,6 +63,11 @@ namespace AppBanHang.Repositories.Implementations
         }
 
         public ReceiptInfo Update(ReceiptInfo entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ReceiptInfo> UpdateAsync(ReceiptInfo entity)
         {
             throw new System.NotImplementedException();
         }

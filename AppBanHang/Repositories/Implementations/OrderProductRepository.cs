@@ -25,6 +25,12 @@ namespace AppBanHang.Repositories.Implementations
         {
             throw new System.NotImplementedException();
         }
+
+        public Task DeleteAsync(OrderProduct entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Dispose()
         {
             throw new System.NotImplementedException();
@@ -51,6 +57,11 @@ namespace AppBanHang.Repositories.Implementations
         }
 
         public OrderProduct Update(OrderProduct entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<OrderProduct> UpdateAsync(OrderProduct entity)
         {
             throw new System.NotImplementedException();
         }

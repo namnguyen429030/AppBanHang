@@ -1,20 +1,30 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:m="using:AppBanHang.Models">
-  <!-- Add Resources Here -->
+	<!-- Add Resources Here -->
 	<DataTemplate x:Key="ProductTemplate" DataType="{x:Type m:Product}">
 		<Border HorizontalAlignment="Center" VerticalAlignment="Center" Width="{StaticResource ItemBoxWidth}" Height="{StaticResource ItemBoxHeight}">
 			<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
 		</Border>
 	</DataTemplate>
 	<DataTemplate x:Key="ReceiptInfoTemplate" DataType="{x:Type m:ReceiptInfo}">
-		<TextBlock>
-			<TextBlock.Text>
-				<MultiBinding StringFormat="{}{0} x {1}">
-					<Binding Path="Product.Name"/>
-					<Binding Path="Amount"/>
-				</MultiBinding>
-			</TextBlock.Text>
-		</TextBlock>	
+		<Border Background="#F5F5F5"
+           CornerRadius="4"
+           Padding="10,5"
+           Margin="0,2">
+			<Grid ColumnDefinitions="*,Auto,Auto">
+				<TextBlock Grid.Column="0"
+						  Text="{Binding Product.Name}"
+						  FontWeight="Medium"/>
+
+				<TextBlock Grid.Column="1"
+						  Text="{Binding Amount, StringFormat='Số lượng {0}'}"
+						  Margin="0, 0, 10, 0"/>
+
+				<TextBlock Grid.Column="2" 
+						   Text="{Binding TotalValue, StringFormat='{}{0:N0}đ'}"
+						   FontWeight="SemiBold"/>
+			</Grid>
+		</Border>
 	</DataTemplate>
 </ResourceDictionary>

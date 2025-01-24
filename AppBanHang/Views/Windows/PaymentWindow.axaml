@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:rxui="http://reactiveui.net"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:m="using:AppBanHang.Models"
+		xmlns:vm="using:AppBanHang.ViewModels.Windows"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AppBanHang.Views.Windows.PaymentWindow"
+		x:DataType="vm:PaymentWindowViewModel"
+        Title="PaymentWindow">
+	<Grid>
+		<Image Source="{Binding PaymentQRCode}" Width="150" Height="150"/>
+	</Grid>
+</Window>

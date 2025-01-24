@@ -8,7 +8,5 @@ namespace AppBanHang.Repositories.Interfaces
     {
         IEnumerable<Product> GetAllByOwnerId(int ownerId);
         Task<IEnumerable<Product>> GetAllByOwnerIdAsync(int ownerId);
-        Task<Product> UpdateAsync(Product product);
-        Task DeleteAsync(Product product);
     }
 }

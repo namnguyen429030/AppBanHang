@@ -29,6 +29,7 @@ namespace AppBanHang
         public static void AddViewModels(this IServiceCollection collection)
         {
             collection.TryAddTransient<MainWindowViewModel>();
+            collection.TryAddSingleton<PaymentWindowViewModel>();
             collection.TryAddTransient<HistoryViewModel>();
             collection.TryAddTransient<HomeViewModel>();
             collection.TryAddTransient<OrderViewModel>();

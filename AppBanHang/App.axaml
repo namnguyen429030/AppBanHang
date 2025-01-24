@@ -8,7 +8,8 @@
   
     <Application.Styles>
         <FluentTheme />
-    </Application.Styles>
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+	</Application.Styles>
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>

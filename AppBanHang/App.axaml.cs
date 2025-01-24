@@ -38,10 +38,15 @@ namespace AppBanHang
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow(serviceProvider)
+                var mainWindow = new MainWindow(serviceProvider)
                 {
                     DataContext = vm
                 };
+                desktop.MainWindow = mainWindow;
+                PaymentWindow paymentWindow = new();
+                paymentWindow.DataContext = serviceProvider.GetService<PaymentWindowViewModel>();
+                mainWindow.Closed += (s, e) => paymentWindow.Close();
+                paymentWindow.Show();
             }
             base.OnFrameworkInitializationCompleted();
         }
