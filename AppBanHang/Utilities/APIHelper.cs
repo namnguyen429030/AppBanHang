@@ -13,7 +13,7 @@ namespace AppBanHang.Utilities
 {
     public static class APIHelper
     {
-        public static async Task<string?> CreatePaymentRequest(string url, string clientKey, string apiKey, PaymentRequestDTO request)
+        public static async Task<string?> PostPaymentRequest<TRequestType>(string url, string clientKey, string apiKey, TRequestType request)
         {
             using(var client = new HttpClient())
             {
@@ -31,6 +31,24 @@ namespace AppBanHang.Utilities
                 }
                 catch(HttpRequestException ex)
                 {
+                    Console.WriteLine(ex.Message);
+                    return null;
+                }
+            }
+        }
+        public static async Task<string?> GetPaymentRequest(string url, string clientKey, string apiKey)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("x-client-id", clientKey);
+                client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+
+                var response = await client.GetAsync(url);
+                try {
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsStringAsync();
+                }
+                catch (HttpRequestException ex) {
                     Console.WriteLine(ex.Message);
                     return null;
                 }

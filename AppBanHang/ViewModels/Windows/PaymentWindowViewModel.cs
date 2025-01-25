@@ -10,6 +10,7 @@ namespace AppBanHang.ViewModels.Windows
     public class PaymentWindowViewModel : WindowViewModelBase
     {
         private ObservableCollection<ReceiptInfo> _currentReceiptInfos = new();
+        private int _totalValue = 0;
         private Bitmap? _paymentQrCode;
         public ObservableCollection<ReceiptInfo> CurrentReceiptInfos
         {
@@ -18,6 +19,11 @@ namespace AppBanHang.ViewModels.Windows
             {
                 this.RaiseAndSetIfChanged(ref _currentReceiptInfos, value);
             }
+        }
+        public int TotalValue
+        {
+            get => _totalValue;
+            set => this.RaiseAndSetIfChanged(ref _totalValue, value);aa
         }
         public Bitmap? PaymentQRCode
         {

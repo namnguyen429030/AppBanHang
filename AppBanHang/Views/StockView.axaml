@@ -52,9 +52,9 @@
 					<TextBlock Text="{StaticResource ProductNameLabel}"/>
 					<TextBox x:Name="productNameTxtBox" Text="{Binding EnteredProductName}"/>
 					<TextBlock Text="{StaticResource ProductPriceLabel}"/>
-					<TextBox x:Name="priceTxtBox" Text="{Binding EnteredProductPrice}"/>
+					<TextBox x:Name="priceTxtBox" TextInputOptions.ContentType="Number" Text="{Binding EnteredProductPrice}"/>
 					<TextBlock Text="{StaticResource ProductInstockLabel}"/>
-					<TextBox x:Name="numberTxtBox" Text="{Binding EnteredProductInstock}"/>
+					<TextBox x:Name="numberTxtBox" TextInputOptions.ContentType="Number" Text="{Binding EnteredProductInstock}"/>
 					<TextBlock Text="{StaticResource ProductImageLabel}"/>
 					<Image Source="{Binding EnteredProductImage}" Width="{StaticResource ProductImageDetailSize}" Height="{StaticResource ProductImageDetailSize}" IsVisible="{Binding IsProductImageAvailable}"/>
 					<Button Content="{StaticResource AddImageButton}" IsVisible="{Binding !IsProductImageAvailable}" Command="{Binding SetProductImageCommand}"/>

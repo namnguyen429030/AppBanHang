@@ -65,5 +65,9 @@ namespace AppBanHang.Views
                 }
             });
         }
+        static StockView()
+        {
+            OSKIntegration.Integrate();
+        }
     }
 }

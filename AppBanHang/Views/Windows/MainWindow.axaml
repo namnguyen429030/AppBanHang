@@ -12,7 +12,7 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="AppBanHang"
 		WindowStartupLocation="CenterScreen"
-		WindowState="FullScreen">
+		WindowState="Maximized">
 	<Grid PointerPressed="LoseAllFocus" Focusable="True" Background="White">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>

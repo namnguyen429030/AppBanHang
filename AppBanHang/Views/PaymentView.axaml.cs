@@ -15,5 +15,9 @@ namespace AppBanHang.Views
         {
             AvaloniaXamlLoader.Load(this);
         }
+        static PaymentView()
+        {
+            OSKIntegration.Integrate();
+        }
     }
 }

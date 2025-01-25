@@ -10,7 +10,6 @@ namespace AppBanHang.Views
     {
         public HomeView()
         {
-
             this.WhenActivated(dispose => { });
             AvaloniaXamlLoader.Load(this);
         }

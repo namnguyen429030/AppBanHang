@@ -3,6 +3,7 @@ using AppBanHang.Models;
 using Avalonia;
 using Avalonia.ReactiveUI;
 using Microsoft.Extensions.DependencyInjection;
+using MindFusion.Keyboard.Avalonia;
 
 namespace AppBanHang
 {
@@ -22,6 +23,7 @@ namespace AppBanHang
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .UseMindFusionKeyboard()
                 .WithInterFont()
                 .LogToTrace()
                 .UseReactiveUI();

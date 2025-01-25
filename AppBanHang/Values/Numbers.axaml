@@ -14,6 +14,8 @@
 	<system:Double x:Key="ItemBoxWidth">200</system:Double>
 	<system:Double x:Key="ItemBoxHeight">200</system:Double>
 
+	<system:Double x:Key="QRCodeSize">250</system:Double>
+	
 	<system:Double x:Key="ViewTitleFontSize">40</system:Double>
 	<system:Double x:Key="ViewContentFontSize">25</system:Double>
 	<system:Double x:Key="LoginTextBoxWidth">400</system:Double>

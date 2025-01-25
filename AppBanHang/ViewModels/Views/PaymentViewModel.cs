@@ -24,6 +24,7 @@ namespace AppBanHang.ViewModels.Views
         private ObservableCollection<Product> _products = new();
         private ObservableCollection<ReceiptInfo> _currentReceiptInfos = new();
         private string _currentProductNumber = "0";
+        private string _currentReceiptStatus = string.Empty;
         private int _totalValue = 0;
         private User? _currentUser;
         private ReceiptInfo? _currentReceiptInfo;
@@ -76,6 +77,11 @@ namespace AppBanHang.ViewModels.Views
             get => _currentUser;
             set => this.RaiseAndSetIfChanged(ref _currentUser, value);
         }
+        public string CurrentReceiptStatus
+        {
+            get => _currentReceiptStatus;
+            set => this.RaiseAndSetIfChanged(ref _currentReceiptStatus, value);
+        }
         public string CurrentProductNumber
         {
             get => _currentProductNumber;
@@ -104,7 +110,12 @@ namespace AppBanHang.ViewModels.Views
         public int TotalValue
         {
             get => _totalValue;
-            set => this.RaiseAndSetIfChanged(ref _totalValue, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _totalValue, value);
+                _paymentWindowViewModel.TotalValue = value;
+
+            }
         }
         public bool IsEditing
         {
@@ -144,13 +155,18 @@ namespace AppBanHang.ViewModels.Views
         public ObservableCollection<ReceiptInfo> CurrentReceiptInfos
         {
             get => _currentReceiptInfos;
-            set => this.RaiseAndSetIfChanged(ref _currentReceiptInfos, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _currentReceiptInfos, value);
+                _paymentWindowViewModel.CurrentReceiptInfos = value;
+            }
         }
         public ReactiveCommand<Unit, Unit> AddProductToPaymentCommand { get; }
         public ReactiveCommand<Unit, Unit> ConfirmPaymentCommand { get; }
         public ReactiveCommand<Unit, Unit> CashMethodSelectedCommand { get; }
         public ReactiveCommand<Unit, Unit> QRCodeMethodSelectedCommand { get; }
         public ReactiveCommand<Unit, Unit> CheckPaymentStatusCommand { get; }
+        public ReactiveCommand<Unit, Unit> CancelPaymentCommand { get; }
         public PaymentViewModel(IScreen hostScreen, IProductService productService, IUserService userService, 
                                 IReceiptService receiptService, PaymentWindowViewModel paymentWindowViewModel) : base(hostScreen)
         {
@@ -159,10 +175,12 @@ namespace AppBanHang.ViewModels.Views
             CashMethodSelectedCommand = ReactiveCommand.Create(() => { SelectedPaymentMethod = PaymentMethod.Cash; });
             QRCodeMethodSelectedCommand = ReactiveCommand.CreateFromTask(QRCodeMethodSelected);
             CheckPaymentStatusCommand = ReactiveCommand.CreateFromTask(CheckPaymentStatus);
+            CancelPaymentCommand = ReactiveCommand.CreateFromTask(CancelPayment);
             _productService = productService;
             _userService = userService;
             _receiptService = receiptService;
             _paymentWindowViewModel = paymentWindowViewModel;
+            CurrentReceiptInfos.CollectionChanged += CurrentReceiptInfos_CollectionChanged;
 
             _userService.CurrentUserChanged += OnCurrentUserChanged;
             _productService.ProductUpdated += OnProductListUpdated;
@@ -171,6 +189,31 @@ namespace AppBanHang.ViewModels.Views
 
         }
 
+        private void CurrentReceiptInfos_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            _paymentWindowViewModel.CurrentReceiptInfos = CurrentReceiptInfos;
+        }
+
+        private async Task CancelPayment()
+        {
+            PaymentCancelRequestDTO paymentCancelRequestDTO = new()
+            {
+                CancellationReason = "Cancelled"
+            };
+            if (CurrentUser != null && CurrentUser.ApiKey != null && CurrentUser.ClientKey != null) {
+                var response = await APIHelper.PostPaymentRequest($"{ConstraintsContainer.PAYMENT_API_DOMAIN}{ConstraintsContainer.PAYMENT_REQUEST_PATH}/{CurrentReceipt.Id}{ConstraintsContainer.PAYMENT_CANCEL_PATH}"
+                    , CurrentUser.ClientKey, CurrentUser.ApiKey, paymentCancelRequestDTO);
+
+                if (response != null)
+                {
+                    PaymentStatusResponseDTO? paymentStatusResponseDTO = JsonSerializer.Deserialize<PaymentStatusResponseDTO>(response);
+                    if (paymentStatusResponseDTO != null)
+                    {
+                        StateSwitch(PaymentViewState.Idle);
+                    }
+                }
+            }
+        }
 
         private void AddProductToPayment()
         {
@@ -198,7 +241,6 @@ namespace AppBanHang.ViewModels.Views
                     CurrentReceiptInfo.TotalValue = currentProductNumber * SelectedProduct.Price;
                     CurrentReceiptInfos[CurrentReceiptInfos.IndexOf(CurrentReceiptInfo)] = CurrentReceiptInfo;
                 }
-                _paymentWindowViewModel.CurrentReceiptInfos = CurrentReceiptInfos;
                 SelectedProduct = null;
                 IsConfirmable = true;
             }
@@ -222,12 +264,12 @@ namespace AppBanHang.ViewModels.Views
         private async Task QRCodeMethodSelected()
         {
             SelectedPaymentMethod = PaymentMethod.QRCode;
-            if (_currentUser != null && _currentUser.ClientKey != null && _currentUser.ApiKey != null && _currentUser.ChecksumKey != null)
+            if (CurrentUser != null && CurrentUser.ClientKey != null && CurrentUser.ApiKey != null && CurrentUser.ChecksumKey != null)
             {
                 List<PaymentItemDTO> items = new();
                 string description = $"{ConstraintsContainer.PAYMENT_PREFIX}{CurrentReceipt.Id}";
                 string data = $"amount={TotalValue}&cancelUrl={ConstraintsContainer.CANCEL_URL}&description={description}&orderCode={CurrentReceipt.Id}&returnUrl={ConstraintsContainer.RETURN_URL}";
-                string signature = APIHelper.GenerateSignature(data, _currentUser.ChecksumKey);
+                string signature = APIHelper.GenerateSignature(data, CurrentUser.ChecksumKey);
                 foreach(var receiptInfo in CurrentReceiptInfos)
                 {
                     PaymentItemDTO item = new();
@@ -247,12 +289,14 @@ namespace AppBanHang.ViewModels.Views
                     ExpiredAt = TimeHelper.ToUnixTimestamp(DateTime.Now.AddMinutes(ConstraintsContainer.QRCODE_TRANSACTION_DURATION)),
 
                 };
-                var response = await APIHelper.CreatePaymentRequest($"{ConstraintsContainer.PAYMENT_API_DOMAIN}{ConstraintsContainer.PAYMENT_REQUEST_URL}", _userService.CurrentUser.ClientKey, _userService.CurrentUser.ApiKey, paymentRequestDTO);
+                var response = await APIHelper.PostPaymentRequest($"{ConstraintsContainer.PAYMENT_API_DOMAIN}{ConstraintsContainer.PAYMENT_REQUEST_PATH}", CurrentUser.ClientKey, CurrentUser.ApiKey, paymentRequestDTO);
                 if (response != null)
                 {
                     PaymentResponseDTO? paymentResponseDTO = JsonSerializer.Deserialize<PaymentResponseDTO>(response);
                     if (paymentResponseDTO != null)
                     {
+                        CurrentReceiptStatus = paymentResponseDTO.Data.Status;
+                        CurrentReceipt.Note = paymentResponseDTO.Data.Status;
                         var qrCodeImage = QRCodeHelper.GenerateQRImage(paymentResponseDTO.Data.QrCode);
                         if (qrCodeImage != null)
                         {
@@ -274,6 +318,20 @@ namespace AppBanHang.ViewModels.Views
                     StateSwitch(PaymentViewState.Idle);
                     break;
                 case PaymentMethod.QRCode:
+                    if (CurrentUser != null && CurrentUser.ApiKey != null && CurrentUser.ClientKey != null)
+                    {
+                        var response = await APIHelper.GetPaymentRequest($"{ConstraintsContainer.PAYMENT_API_DOMAIN}{ConstraintsContainer.PAYMENT_REQUEST_PATH}/{CurrentReceipt.Id}",
+                            CurrentUser.ClientKey,
+                            CurrentUser.ApiKey);
+                        if (response != null)
+                        {
+                            PaymentStatusResponseDTO? paymentStatusResponseDTO = JsonSerializer.Deserialize<PaymentStatusResponseDTO>(response);
+                            if (paymentStatusResponseDTO != null)
+                            {
+                                CurrentReceiptStatus = paymentStatusResponseDTO.Data.Status;
+                            }
+                        }
+                    }
                     break;
             }
         }
@@ -287,7 +345,6 @@ namespace AppBanHang.ViewModels.Views
                     IsConfirmable = false;
                     StateSwitch(PaymentViewState.Idle);
                 }
-                _paymentWindowViewModel.CurrentReceiptInfos = CurrentReceiptInfos;
             }
         }
         private void OnCurrentUserChanged(User user)
@@ -350,6 +407,8 @@ namespace AppBanHang.ViewModels.Views
                     CurrentReceipt = new();
                     CurrentReceiptInfo = null;
                     CurrentReceiptInfos = new();
+                    CurrentReceiptStatus = string.Empty;
+                    TotalValue = 0;
                     IsAdding = false;
                     IsConfirmed = false;
                     IsUpdating = false;
