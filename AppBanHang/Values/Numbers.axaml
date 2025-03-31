@@ -26,6 +26,8 @@
 	<system:Double x:Key="ProductImageListSize">90</system:Double>
 	<system:Double x:Key="ProductImageDetailSize">280</system:Double>
 
+	<system:Double x:Key="OrderTableHeight">400</system:Double>
+	<system:Double x:Key="OrderTableWidth">700</system:Double>
 	<system:Double x:Key="ProductImageFontSize">20</system:Double>
 	<system:Double x:Key="ProductImageButtonWidth">150</system:Double>
 	<system:Double x:Key="ProductImageButtonHeight">40</system:Double>

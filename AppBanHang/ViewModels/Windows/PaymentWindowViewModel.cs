@@ -23,7 +23,7 @@ namespace AppBanHang.ViewModels.Windows
         public int TotalValue
         {
             get => _totalValue;
-            set => this.RaiseAndSetIfChanged(ref _totalValue, value);aa
+            set => this.RaiseAndSetIfChanged(ref _totalValue, value);
         }
         public Bitmap? PaymentQRCode
         {

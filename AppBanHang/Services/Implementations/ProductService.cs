@@ -62,11 +62,6 @@ namespace AppBanHang.Services.Implementations
             return _productRepository.GetAll();
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsByUserIdAsync(int userId)
-        {
-            return await _productRepository.GetAllByOwnerIdAsync(userId);
-        }
-
         public Product? GetProductById(int id)
         {
             return _productRepository.GetByKey(id);

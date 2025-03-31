@@ -27,14 +27,21 @@
 		<ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
 			<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
 				<TextBlock Text="{StaticResource PaymentTitle}" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
-				<ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden"
-						 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-						 ItemsSource="{Binding CurrentReceiptInfos}"
-						 ItemTemplate="{StaticResource ReceiptInfoTemplate}"
-						 SelectedItem="{Binding CurrentReceiptInfo}"
-					Height="{StaticResource SiderReceiptListHeight}">
-
-				</ListBox>
+				<DataGrid ItemsSource="{Binding CurrentReceiptInfos}"
+						  AutoGenerateColumns="False"
+						  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+						  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+						  SelectedItem="{Binding CurrentReceiptInfo}"
+						  Height="{StaticResource SiderReceiptListHeight}">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Sản phẩm"
+										  Binding="{Binding Product.Name}"/>
+						<DataGridTextColumn Header="Số lượng"
+										  Binding="{Binding Amount}"/>
+						<DataGridTextColumn Header="Thành tiền"
+										  Binding="{Binding TotalValue, StringFormat='{}{0:N0} VNĐ'}"/>
+					</DataGrid.Columns>
+				</DataGrid>
 				<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="{StaticResource SiderComponentsSpacing}">
 					<StackPanel.Styles>
 						<Style Selector="TextBlock">
@@ -53,6 +60,7 @@
 					<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
 						<TextBlock Text="{StaticResource ProductAmountLabel}" Margin="15, 0, 0, 0"/>
 						<TextBox x:Name="numberTxtBox" IsEnabled="{Binding IsEditing}" TextInputOptions.ContentType="Number" Text="{Binding CurrentProductNumber}"/>
+						<TextBlock x:Name="giveCashTxtBox" IsVisible="{Binding IsCashMethodSelected}" IsEnabled="{Binding IsCashMethodSelected}" TextInputOptions.ContentType="Number" Text="{Binding GivenCash}"/>
 					</StackPanel>
 					<StackPanel Orientation="Vertical">
 						<Button x:Name="addPaymentBtn" Content="{StaticResource AddProductPaymentButton}" Command="{Binding AddProductToPaymentCommand}" IsEnabled="{Binding IsAdding}"/>

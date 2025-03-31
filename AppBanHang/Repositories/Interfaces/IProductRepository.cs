@@ -7,6 +7,5 @@ namespace AppBanHang.Repositories.Interfaces
     public interface IProductRepository : IRepository<int, Product>
     {
         IEnumerable<Product> GetAllByOwnerId(int ownerId);
-        Task<IEnumerable<Product>> GetAllByOwnerIdAsync(int ownerId);
     }
 }

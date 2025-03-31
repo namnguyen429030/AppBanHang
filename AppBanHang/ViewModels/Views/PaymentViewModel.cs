@@ -25,6 +25,7 @@ namespace AppBanHang.ViewModels.Views
         private ObservableCollection<ReceiptInfo> _currentReceiptInfos = new();
         private string _currentProductNumber = "0";
         private string _currentReceiptStatus = string.Empty;
+        private string _givenCash = "0";
         private int _totalValue = 0;
         private User? _currentUser;
         private ReceiptInfo? _currentReceiptInfo;
@@ -34,6 +35,7 @@ namespace AppBanHang.ViewModels.Views
         private bool _isConfirmed;
         private bool _isConfirmable;
         private bool _isPaymentMethodSelected;
+        private bool _isCashMethodSelected;
         private PaymentMethod _selectedPaymentMethod;
 
         private readonly IProductService _productService;
@@ -62,7 +64,7 @@ namespace AppBanHang.ViewModels.Views
             set
             {
                 this.RaiseAndSetIfChanged(ref _currentReceiptInfo, value);
-                if(value != null)
+                if (value != null)
                 {
                     CurrentProductNumber = value.Amount.ToString();
                 }
@@ -95,6 +97,22 @@ namespace AppBanHang.ViewModels.Views
                 else
                 {
                     this.RaiseAndSetIfChanged(ref _currentProductNumber, "0");
+                }
+            }
+        }
+        public string GivenCash
+        {
+            get => _givenCash;
+            set
+            {
+                int parsedValue;
+                if (int.TryParse(value, out parsedValue))
+                {
+                    this.RaiseAndSetIfChanged(ref _givenCash, value);
+                }
+                else
+                {
+                    this.RaiseAndSetIfChanged(ref _givenCash, "0");
                 }
             }
         }
@@ -147,6 +165,11 @@ namespace AppBanHang.ViewModels.Views
             get => _isConfirmable;
             set => this.RaiseAndSetIfChanged(ref _isConfirmable, value);
         }
+        public bool IsCashMethodSelected
+        {
+            get => _isCashMethodSelected;
+            set => this.RaiseAndSetIfChanged(ref _isCashMethodSelected, value);
+        }
         public ObservableCollection<Product> Products
         {
             get => _products;
@@ -167,7 +190,7 @@ namespace AppBanHang.ViewModels.Views
         public ReactiveCommand<Unit, Unit> QRCodeMethodSelectedCommand { get; }
         public ReactiveCommand<Unit, Unit> CheckPaymentStatusCommand { get; }
         public ReactiveCommand<Unit, Unit> CancelPaymentCommand { get; }
-        public PaymentViewModel(IScreen hostScreen, IProductService productService, IUserService userService, 
+        public PaymentViewModel(IScreen hostScreen, IProductService productService, IUserService userService,
                                 IReceiptService receiptService, PaymentWindowViewModel paymentWindowViewModel) : base(hostScreen)
         {
             AddProductToPaymentCommand = ReactiveCommand.Create(AddProductToPayment);
@@ -200,7 +223,8 @@ namespace AppBanHang.ViewModels.Views
             {
                 CancellationReason = "Cancelled"
             };
-            if (CurrentUser != null && CurrentUser.ApiKey != null && CurrentUser.ClientKey != null) {
+            if (CurrentUser != null && CurrentUser.ApiKey != null && CurrentUser.ClientKey != null)
+            {
                 var response = await APIHelper.PostPaymentRequest($"{ConstraintsContainer.PAYMENT_API_DOMAIN}{ConstraintsContainer.PAYMENT_REQUEST_PATH}/{CurrentReceipt.Id}{ConstraintsContainer.PAYMENT_CANCEL_PATH}"
                     , CurrentUser.ClientKey, CurrentUser.ApiKey, paymentCancelRequestDTO);
 
@@ -218,7 +242,7 @@ namespace AppBanHang.ViewModels.Views
         private void AddProductToPayment()
         {
             var currentProductNumber = int.Parse(CurrentProductNumber);
-            if(currentProductNumber <= 0)
+            if (currentProductNumber <= 0)
             {
                 RemoveProductFromPayment();
                 return;
@@ -270,7 +294,7 @@ namespace AppBanHang.ViewModels.Views
                 string description = $"{ConstraintsContainer.PAYMENT_PREFIX}{CurrentReceipt.Id}";
                 string data = $"amount={TotalValue}&cancelUrl={ConstraintsContainer.CANCEL_URL}&description={description}&orderCode={CurrentReceipt.Id}&returnUrl={ConstraintsContainer.RETURN_URL}";
                 string signature = APIHelper.GenerateSignature(data, CurrentUser.ChecksumKey);
-                foreach(var receiptInfo in CurrentReceiptInfos)
+                foreach (var receiptInfo in CurrentReceiptInfos)
                 {
                     PaymentItemDTO item = new();
                     item.Name = receiptInfo.Product.Name;
@@ -315,7 +339,7 @@ namespace AppBanHang.ViewModels.Views
             switch (SelectedPaymentMethod)
             {
                 case PaymentMethod.Cash:
-                    StateSwitch(PaymentViewState.Idle);
+                    IsCashMethodSelected = true;
                     break;
                 case PaymentMethod.QRCode:
                     if (CurrentUser != null && CurrentUser.ApiKey != null && CurrentUser.ClientKey != null)
@@ -399,7 +423,7 @@ namespace AppBanHang.ViewModels.Views
             Cash,
             QRCode,
         }
-        private void StateSwitch(PaymentViewState state) 
+        private void StateSwitch(PaymentViewState state)
         {
             switch (state)
             {
@@ -413,7 +437,9 @@ namespace AppBanHang.ViewModels.Views
                     IsConfirmed = false;
                     IsUpdating = false;
                     IsEditing = false;
+                    IsCashMethodSelected = false;
                     IsPaymentMethodSelected = false;
+                    _paymentWindowViewModel.PaymentQRCode = null;
                     break;
                 case PaymentViewState.Adding:
                     IsEditing = true;

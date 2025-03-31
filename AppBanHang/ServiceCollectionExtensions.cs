@@ -18,12 +18,15 @@ namespace AppBanHang
             collection.TryAddSingleton<IProductRepository, ProductRepository>();
             collection.TryAddSingleton<IReceiptInfoRepository, ReceiptInfoRepository>();
             collection.TryAddSingleton<IReceiptRepository, ReceiptRepository>();
+            collection.TryAddSingleton<IOrderRepository, OrderRepository>();
+            collection.TryAddSingleton<IOrderProductRepository, OrderProductRepository>();
         }
         public static void AddServices(this IServiceCollection collection)
         {
             collection.TryAddSingleton<IUserService, UserService>();
             collection.TryAddSingleton<IProductService, ProductService>();
             collection.TryAddSingleton<IReceiptService, ReceiptService>();
+            collection.TryAddSingleton<IOrderService, OrderService>();
         }
 
         public static void AddViewModels(this IServiceCollection collection)

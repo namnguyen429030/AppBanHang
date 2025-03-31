@@ -9,17 +9,24 @@ namespace AppBanHang.Services.Implementations
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
-        public OrderService(IOrderRepository orderRepository)
+        private readonly IOrderProductRepository _orderProductRepository;
+        public OrderService(IOrderRepository orderRepository, IOrderProductRepository orderProductRepository)
         {
             _orderRepository = orderRepository;
+            _orderProductRepository = orderProductRepository;
         }
 
-        public Order AddOrder(Order order)
+        public Order AddOrder(Order order, IEnumerable<OrderProduct> orderProducts)
         {
-            throw new System.NotImplementedException();
+            _orderRepository.Add(order);
+            foreach (var orderProduct in orderProducts)
+            {
+                orderProduct.OrderId = order.Id;
+            }
+            return order;
         }
 
-        public Task<Order> AddOrderAsync(Order order)
+        public Task<Order> AddOrderAsync(Order order, IEnumerable<OrderProduct> orderProducts)
         {
             throw new System.NotImplementedException();
         }
@@ -29,9 +36,14 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Order> GetAllOrdersByUserId(int userId)
+        public Task<Order> DeleteOrderAsync(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<Order> GetAllOrdersByUserId(int userId)
+        {
+            return _orderRepository.GetAllByOwnerId(userId);
         }
 
         public Task<IEnumerable<Order>> GetAllOrdersByUserIdAsync(int userId)
@@ -44,12 +56,16 @@ namespace AppBanHang.Services.Implementations
             throw new System.NotImplementedException();
         }
 
-        public Task<Order> GetOrderByIdAsync(int id)
+        public Task<Order?> GetOrderByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+        public Order UpdateOrder(Order order, IEnumerable<OrderProduct> orderProducts)
         {
             throw new System.NotImplementedException();
         }
 
-        public Order UpdateOrder(Order order)
+        public Task<Order> UpdateOrderAsync(Order order, IEnumerable<OrderProduct> orderProducts)
         {
             throw new System.NotImplementedException();
         }
