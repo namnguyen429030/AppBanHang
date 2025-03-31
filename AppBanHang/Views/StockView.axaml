@@ -1,0 +1,73 @@
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+						  xmlns:vm="using:AppBanHang.ViewModels.Views"
+						  xmlns:m ="using:AppBanHang.Models"
+						  xmlns:local="using:AppBanHang"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+						  x:Class="AppBanHang.Views.StockView"
+						  x:DataType="vm:StockViewModel">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="350"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<ListBox Grid.Column="0" ItemsSource="{Binding Products}" ItemTemplate="{StaticResource ProductTemplate}" SelectedItem="{Binding SelectedProduct}" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Columns="3"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox>
+		<ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+			<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
+				<StackPanel.Styles>
+					<Style Selector="TextBlock">
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+					</Style>
+					<Style Selector="StackPanel > Button">
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						<Setter Property="Width" Value="{StaticResource SiderWidth}"/>
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+					</Style>
+					<Style Selector="TextBox">
+						<Setter Property="Width" Value="{StaticResource SiderTextBoxWidth}"/>
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+					</Style>
+				</StackPanel.Styles>
+				<TextBlock Text="{StaticResource StockTitle}" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
+				<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
+					<StackPanel.Styles>
+						<Style Selector="Button">
+							<Setter Property="Width" Value="{StaticResource ProductImageButtonWidth}"/>
+							<Setter Property="Height" Value="{StaticResource ProductImageButtonHeight}"/>
+							<Setter Property="FontSize" Value="{StaticResource ProductImageFontSize}"/>
+							<Setter Property="HorizontalAlignment" Value="Center"/>
+							<Setter Property="HorizontalContentAlignment" Value="Center"/>
+							<Setter Property="VerticalContentAlignment" Value="Center"/>
+						</Style>
+					</StackPanel.Styles>
+					<TextBlock Text="{StaticResource ProductNameLabel}"/>
+					<TextBox x:Name="productNameTxtBox" Text="{Binding EnteredProductName}"/>
+					<TextBlock Text="{StaticResource ProductPriceLabel}"/>
+					<TextBox x:Name="priceTxtBox" TextInputOptions.ContentType="Number" Text="{Binding EnteredProductPrice}"/>
+					<TextBlock Text="{StaticResource ProductInstockLabel}"/>
+					<TextBox x:Name="numberTxtBox" TextInputOptions.ContentType="Number" Text="{Binding EnteredProductInstock}"/>
+					<TextBlock Text="{StaticResource ProductImageLabel}"/>
+					<Image Source="{Binding EnteredProductImage}" Width="{StaticResource ProductImageDetailSize}" Height="{StaticResource ProductImageDetailSize}" IsVisible="{Binding IsProductImageAvailable}"/>
+					<Button Content="{StaticResource AddImageButton}" IsVisible="{Binding !IsProductImageAvailable}" Command="{Binding SetProductImageCommand}"/>
+					<Button Content="{StaticResource EditImageButton}" IsVisible="{Binding IsProductImageAvailable}" Command="{Binding SetProductImageCommand}"/>
+				</StackPanel>
+				<StackPanel Orientation="Vertical">
+					<Button x:Name="addProductBtn" Content="Thêm sản phẩm" IsEnabled="{Binding !IsSaving}" Command="{Binding AddProductCommand}"/>
+					<Button x:Name="deleteProductBtn" Content="Xóa sản phẩm" IsEnabled="{Binding IsEditing}" Command="{Binding DeleteProductCommand}" Background="Red"/>
+					<Button x:Name="updateProductBtn" Content="Cập nhật sản phẩm" IsEnabled="{Binding IsEditing}" Command="{Binding UpdateProductCommand}"/>
+					<Button x:Name="clearBtn" Content="Hủy" IsEnabled="{Binding IsEditing}"/>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+
+</rxui:ReactiveUserControl>

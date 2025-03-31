@@ -1,0 +1,35 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=System.Runtime">
+	<system:String x:Key="LoginTitle">Đăng nhập</system:String>
+	<system:String x:Key="RegistrationTitle">Đăng ký</system:String>
+	<system:String x:Key="UsernameLabel">Tên đăng nhập</system:String>
+	<system:String x:Key="PasswordLabel">Mật khẩu</system:String>
+	<system:String x:Key="AliasLabel">Tên hiển thị</system:String>
+	<system:String x:Key="ClientKeyLabel">Client key</system:String>
+	<system:String x:Key="APIKeyLabel">API key</system:String>
+	<system:String x:Key="ChecksumKeyLabel">Checksum key</system:String>
+	<system:String x:Key="StockTitle">Kho</system:String>
+	<system:String x:Key="PaymentTitle">Thanh toán</system:String>
+	<system:String x:Key="OrderTitle">Đặt hàng</system:String>
+	<system:String x:Key="HistoryTitle">Lịch sử</system:String>
+	<system:String x:Key="ProductNameLabel">Tên sản phẩm</system:String>
+	<system:String x:Key="ProductPriceLabel">Đơn giá</system:String>
+	<system:String x:Key="ProductInstockLabel">Số lượng</system:String>
+	<system:String x:Key="ProductImageLabel">Ảnh sản phẩm</system:String>
+	<system:String x:Key="AddImageButton">Thêm ảnh</system:String>
+	<system:String x:Key="EditImageButton">Sửa ảnh</system:String>
+	<system:String x:Key="AddProductButton">Thêm sản phẩm</system:String>
+	<system:String x:Key="UpdateProductButton">Cập nhật sản phẩm</system:String>
+	<system:String x:Key="DeleteProductButton">Xóa sản phẩm</system:String>
+	<system:String x:Key="CancelButton">Hủy</system:String>
+	<system:String x:Key="AddProductPaymentButton">Thêm vào giỏ</system:String>
+	<system:String x:Key="CancelPaymentButton">Hủy đơn</system:String>
+	<system:String x:Key="ConfirmPaymentButton">Xác nhận đơn</system:String>
+	<system:String x:Key="ConfirmCheckoutButton">Xác nhận thanh toán</system:String>
+	<system:String x:Key="ProductAmountLabel">Số lượng</system:String>
+	<system:String x:Key="UpdateProductPaymentButton">Cập nhật đơn</system:String>
+	<system:String x:Key="TotalValueLabel">Tổng</system:String>
+	<system:String x:Key="CashPaymentMethod">Tiền mặt</system:String>
+	<system:String x:Key="QRCodePaymentMethod">QR Code</system:String>
+</ResourceDictionary>

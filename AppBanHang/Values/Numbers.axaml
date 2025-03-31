@@ -1,0 +1,34 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=System.Runtime">
+	<system:Double x:Key="NavigationButtonWidth">200</system:Double>
+	<system:Double x:Key="NavigationButtonHeight">80</system:Double>
+	<system:Double x:Key="NavigationButtonFontSize">30</system:Double>
+
+	<system:Double x:Key="SiderComponentsSpacing">15</system:Double>
+	<system:Double x:Key="SiderWidth">350</system:Double>
+	<system:Double x:Key="SiderReceiptListHeight">150</system:Double>
+	<system:Double x:Key="LoginComponentsSpacing">15</system:Double>
+	<system:Double x:Key="NavigationButtonsSpacing">50</system:Double>
+
+	<system:Double x:Key="ItemBoxWidth">200</system:Double>
+	<system:Double x:Key="ItemBoxHeight">200</system:Double>
+
+	<system:Double x:Key="QRCodeSize">250</system:Double>
+	
+	<system:Double x:Key="ViewTitleFontSize">40</system:Double>
+	<system:Double x:Key="ViewContentFontSize">25</system:Double>
+	<system:Double x:Key="LoginTextBoxWidth">400</system:Double>
+	<system:Double x:Key="LoginTextBoxHeight">60</system:Double>
+	<system:Double x:Key="SiderTextBoxWidth">300</system:Double>
+	<system:Double x:Key="LoginButtonWidth">250</system:Double>
+	<system:Double x:Key="LoginButtonHeight">50</system:Double>
+	<system:Double x:Key="ProductImageListSize">90</system:Double>
+	<system:Double x:Key="ProductImageDetailSize">280</system:Double>
+
+	<system:Double x:Key="OrderTableHeight">400</system:Double>
+	<system:Double x:Key="OrderTableWidth">700</system:Double>
+	<system:Double x:Key="ProductImageFontSize">20</system:Double>
+	<system:Double x:Key="ProductImageButtonWidth">150</system:Double>
+	<system:Double x:Key="ProductImageButtonHeight">40</system:Double>
+</ResourceDictionary>

@@ -1,0 +1,54 @@
+<Window
+		xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AppBanHang.ViewModels.Windows"
+		xmlns:app="clr-namespace:AppBanHang;assembly=AppBanHang"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:rxui="http://reactiveui.net"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+        x:Class="AppBanHang.Views.Windows.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AppBanHang"
+		WindowStartupLocation="CenterScreen"
+		WindowState="Maximized">
+	<Grid PointerPressed="LoseAllFocus" Focusable="True" Background="White">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+			<StackPanel Grid.Row="0" ZIndex="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Spacing="{StaticResource NavigationButtonsSpacing}">
+				<StackPanel.Styles>
+					<Style Selector="Button">
+						<Setter Property="Width" Value="{StaticResource NavigationButtonWidth}"/>
+						<Setter Property="Height" Value="{StaticResource NavigationButtonHeight}"/>
+						<Setter Property="FontSize" Value="{StaticResource NavigationButtonFontSize}"/>
+						<Setter Property="Foreground" Value="{StaticResource NavigationButtonTextColor}"/>
+						<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+						<Setter Property="Background" Value="{StaticResource NavigationButtonColor}"/>
+					</Style>
+				</StackPanel.Styles>
+				<Button x:Name="homeBtn" Content="Trang chủ" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="stockBtn" Content="Kho" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="orderBtn" Content="Đặt hàng" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="historyBtn" Content="Lịch sử" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="paymentBtn" Content="Thanh toán" IsEnabled="{Binding IsLoggedIn}"></Button>
+				<Button x:Name="quitBtn" Content="Thoát" Click="QuitCommand" Background="{StaticResource QuitButtonColor}"></Button>
+			</StackPanel>
+		</ScrollViewer>
+		<rxui:RoutedViewHost
+			Name="RoutedViewHost"
+			Grid.Row="1"
+			PageTransition="{x:Null}">
+			<rxui:RoutedViewHost.DefaultContent>
+
+			</rxui:RoutedViewHost.DefaultContent>
+			<rxui:RoutedViewHost.ViewLocator>
+				<app:ViewLocator/>
+			</rxui:RoutedViewHost.ViewLocator>
+		</rxui:RoutedViewHost>
+	</Grid>
+</Window>

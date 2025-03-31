@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:rxui="http://reactiveui.net"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:m="using:AppBanHang.Models"
+		xmlns:vm="using:AppBanHang.ViewModels.Windows"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+        x:Class="AppBanHang.Views.Windows.PaymentWindow"
+		x:DataType="vm:PaymentWindowViewModel"
+        Title="PaymentWindow"
+	WindowStartupLocation="CenterScreen"
+	WindowState="Maximized">
+	<Grid RowDefinitions="*, 250" ColumnDefinitions="">
+		<ListBox ItemsSource="{Binding CurrentReceiptInfos}" ItemTemplate="{StaticResource ReceiptInfoClientTemplate}"/>
+		<Grid ColumnDefinitions="*, 250" Grid.Row="1">
+			<Grid.Styles>
+				<Style Selector="TextBlock">
+					<Setter Property="FontSize" Value="{StaticResource ViewTitleFontSize}"/>
+				</Style>
+			</Grid.Styles>
+			<TextBlock Grid.Column="0" Text="{Binding TotalValue, StringFormat='Tổng tiền: {0:N0}đ'}"/>
+			<Image HorizontalAlignment="Center" Grid.Column="1" Source="{Binding PaymentQRCode}" Width="{StaticResource QRCodeSize}" Height="{StaticResource QRCodeSize}"/>
+		</Grid>
+	</Grid>
+</Window>

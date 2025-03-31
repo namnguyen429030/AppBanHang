@@ -1,0 +1,97 @@
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+						  xmlns:vm="using:AppBanHang.ViewModels.Views"
+						  xmlns:m="using:AppBanHang.Models"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+						  x:Class="AppBanHang.Views.PaymentView"
+						  x:DataType="vm:PaymentViewModel">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"></ColumnDefinition>
+			<ColumnDefinition Width="350"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+		<ListBox Grid.Column="0" ItemsSource="{Binding Products}"
+				 ScrollViewer.VerticalScrollBarVisibility="Hidden"
+				 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+				SelectionMode="Single" SelectedItem="{Binding SelectedProduct}"
+				ItemTemplate="{StaticResource ProductTemplate}">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<UniformGrid Columns="3"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox>
+		<ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+			<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
+				<TextBlock Text="{StaticResource PaymentTitle}" FontSize="{StaticResource ViewTitleFontSize}" HorizontalAlignment="Center" FontWeight="Bold"/>
+				<DataGrid ItemsSource="{Binding CurrentReceiptInfos}"
+						  AutoGenerateColumns="False"
+						  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+						  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+						  SelectedItem="{Binding CurrentReceiptInfo}"
+						  Height="{StaticResource SiderReceiptListHeight}">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Sản phẩm"
+										  Binding="{Binding Product.Name}"/>
+						<DataGridTextColumn Header="Số lượng"
+										  Binding="{Binding Amount}"/>
+						<DataGridTextColumn Header="Thành tiền"
+										  Binding="{Binding TotalValue, StringFormat='{}{0:N0} VNĐ'}"/>
+					</DataGrid.Columns>
+				</DataGrid>
+				<StackPanel Orientation="Vertical" HorizontalAlignment="Left" Spacing="{StaticResource SiderComponentsSpacing}">
+					<StackPanel.Styles>
+						<Style Selector="TextBlock">
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						</Style>
+						<Style Selector="StackPanel > Button">
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+							<Setter Property="Width" Value="{StaticResource SiderWidth}"/>
+							<Setter Property="HorizontalContentAlignment" Value="Center"/>
+						</Style>
+						<Style Selector="TextBox">
+							<Setter Property="Width" Value="{StaticResource SiderTextBoxWidth}"/>
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						</Style>
+					</StackPanel.Styles>
+					<StackPanel Spacing="{StaticResource SiderComponentsSpacing}" HorizontalAlignment="Center">
+						<TextBlock Text="{StaticResource ProductAmountLabel}" Margin="15, 0, 0, 0"/>
+						<TextBox x:Name="numberTxtBox" IsEnabled="{Binding IsEditing}" TextInputOptions.ContentType="Number" Text="{Binding CurrentProductNumber}"/>
+						<TextBlock x:Name="giveCashTxtBox" IsVisible="{Binding IsCashMethodSelected}" IsEnabled="{Binding IsCashMethodSelected}" TextInputOptions.ContentType="Number" Text="{Binding GivenCash}"/>
+					</StackPanel>
+					<StackPanel Orientation="Vertical">
+						<Button x:Name="addPaymentBtn" Content="{StaticResource AddProductPaymentButton}" Command="{Binding AddProductToPaymentCommand}" IsEnabled="{Binding IsAdding}"/>
+						<Button x:Name="updatePaymentBtn" Content="{StaticResource UpdateProductPaymentButton}" Command="{Binding AddProductToPaymentCommand}" IsEnabled="{Binding IsUpdating}"/>
+						<Button x:Name="confirmPaymentBtn" Content="{StaticResource ConfirmPaymentButton}" IsEnabled="{Binding IsConfirmable}" Command="{Binding ConfirmPaymentCommand}"/>
+						<Button x:Name="cancelPaymentBtn" Content="{StaticResource CancelPaymentButton}" IsEnabled="{Binding IsPaymentMethodSelected}" Command="{Binding CancelPaymentCommand}" Background="Red"/>
+						<Button x:Name="checkPaymentStatusBtn" Content="{StaticResource ConfirmCheckoutButton}" IsEnabled="{Binding IsPaymentMethodSelected}" Command="{Binding CheckPaymentStatusCommand}"/>
+					</StackPanel>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+					<StackPanel.Styles>
+						<Style Selector="Button">
+							<Setter Property="Width" Value="150"/>
+						</Style>
+					</StackPanel.Styles>
+					<Button Content="{StaticResource CashPaymentMethod}" IsEnabled="{Binding !IsPaymentMethodSelected}" IsVisible="{Binding IsConfirmed}" Command="{Binding CashMethodSelectedCommand}"/>
+					<Button Content="{StaticResource QRCodePaymentMethod}" IsEnabled="{Binding !IsPaymentMethodSelected}" IsVisible="{Binding IsConfirmed}" Command="{Binding QRCodeMethodSelectedCommand}"/>
+				</StackPanel>
+				<Border>
+					<Grid ColumnDefinitions="145, 205" RowDefinitions="70, 70">
+						<Grid.Styles>
+							<Style Selector="TextBlock">
+								<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+							</Style>
+						</Grid.Styles>
+						<TextBlock Grid.Column="0" Grid.Row="0" Text="{StaticResource TotalValueLabel}" HorizontalAlignment="Center"/>
+						<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding TotalValue, StringFormat='{}{0:N0}đ'}"/>
+						<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding CurrentReceiptStatus}"/>
+					</Grid>
+				</Border>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</rxui:ReactiveUserControl>

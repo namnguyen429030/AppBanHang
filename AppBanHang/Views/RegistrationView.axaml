@@ -1,0 +1,55 @@
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:rxui="http://reactiveui.net"
+			 xmlns:vm="using:AppBanHang.ViewModels.Views"
+			 xmlns:m="using:AppBanHang.Models"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="AppBanHang.Views.RegistrationView"
+			 x:DataType="vm:RegistrationViewModel">
+	<Grid>
+		<ScrollViewer VerticalScrollBarVisibility="Hidden">
+			<Border Background="{StaticResource PanelBackgroundDefault}">
+				<StackPanel Orientation="Vertical" Spacing="{StaticResource LoginComponentsSpacing}" HorizontalAlignment="Center" VerticalAlignment="Center">
+					<StackPanel.Styles>
+						<Style Selector="TextBox">
+							<Setter Property="Width" Value="{StaticResource LoginTextBoxWidth}"/>
+							<Setter Property="Height" Value="{StaticResource LoginTextBoxHeight}"/>
+							<Setter Property="VerticalContentAlignment" Value="Center"/>
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						</Style>
+						<Style Selector="TextBlock">
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+						</Style>
+					</StackPanel.Styles>
+					<TextBlock Text="{StaticResource RegistrationTitle}" HorizontalAlignment="Center" FontSize="{StaticResource ViewTitleFontSize}" FontWeight="Bold"/>
+					<TextBlock Text="{StaticResource UsernameLabel}" IsVisible="{Binding !IsUsernameEmpty}"/>
+					<TextBox x:Name="usernameTxtBox" Watermark="{StaticResource UsernameLabel}" Text="{Binding EnteredUsername}"/>
+					<TextBlock Text="{StaticResource PasswordLabel}" IsVisible="{Binding !IsPasswordEmpty}"/>
+					<TextBox x:Name="passwordTxtBox" Watermark="{StaticResource PasswordLabel}" PasswordChar="*" Text="{Binding EnteredPassword}"/>
+					<TextBlock Text="{StaticResource AliasLabel}" IsVisible="{Binding !IsAliasEmpty}"/>
+					<TextBox x:Name="aliasTxtBox" Watermark="{StaticResource AliasLabel}" Text="{Binding EnteredAlias}"/>
+					<TextBlock Text="{StaticResource ClientKeyLabel}" IsVisible="{Binding !IsClientKeyEmpty}"/>
+					<TextBox x:Name="clientKeyTxtBox" Watermark="{StaticResource ClientKeyLabel}" PasswordChar="*" Text="{Binding EnteredClientKey}"/>
+					<TextBlock Text="{StaticResource APIKeyLabel}" IsVisible="{Binding !IsApiKeyEmpty}"/>
+					<TextBox x:Name="apiKeyTxtBox" Watermark="{StaticResource APIKeyLabel}" PasswordChar="*" Text="{Binding EnteredApiKey}"/>
+					<TextBlock Text="{StaticResource ChecksumKeyLabel}" IsVisible="{Binding !IsCheckSumKeyEmpty}"/>
+					<TextBox x:Name="checkSumKeyTxtBox" Watermark="{StaticResource ChecksumKeyLabel}" PasswordChar="*" Text="{Binding EnteredCheckSumKey}"/>
+					<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="{StaticResource LoginComponentsSpacing}">
+						<StackPanel.Styles>
+							<Style Selector="Button">
+								<Setter Property="Width" Value="{StaticResource LoginButtonWidth}"/>
+								<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+								<Setter Property="HorizontalContentAlignment" Value="Center"/>
+								<Setter Property="FontWeight" Value="Bold"/>
+							</Style>
+						</StackPanel.Styles>
+						<Button Content="Đăng nhập" Command="{Binding SwitchToLoginViewCommand}"/>
+						<Button Content="Đăng ký" IsEnabled="{Binding IsRegisterable}" Command="{Binding RegisterCommand}"/>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+		</ScrollViewer>
+	</Grid>
+</rxui:ReactiveUserControl>

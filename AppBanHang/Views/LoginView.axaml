@@ -1,0 +1,47 @@
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+						  xmlns:rxui="http://reactiveui.net"
+						  xmlns:vm="using:AppBanHang.ViewModels.Views"
+						  xmlns:m="using:AppBanHang.Models"
+						  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+						  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+						  mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+						  x:Class="AppBanHang.Views.LoginView"
+						  x:DataType="vm:LoginViewModel">
+	<Grid>
+		<Border Background="{StaticResource PanelBackgroundDefault}">
+			<StackPanel Orientation="Vertical" Spacing="{StaticResource LoginComponentsSpacing}" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<StackPanel.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="Width" Value="{StaticResource LoginTextBoxWidth}"/>
+						<Setter Property="Height" Value="{StaticResource LoginTextBoxHeight}"/>
+						<Setter Property="VerticalContentAlignment" Value="Center"/>
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+					</Style>
+					<Style Selector="TextBlock">
+						<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+					</Style>
+				</StackPanel.Styles>
+				<TextBlock Text="{StaticResource LoginTitle}" HorizontalAlignment="Center" FontSize="{StaticResource ViewTitleFontSize}" FontWeight="Bold"/>
+				<TextBlock Text="{StaticResource UsernameLabel}" IsVisible="{Binding !IsUsernameEmpty}"/>
+				<TextBox x:Name="usernameTxtBox" Watermark="{StaticResource UsernameLabel}" Text="{Binding EnteredUsername}"/>
+				<TextBlock Text="{StaticResource PasswordLabel}" IsVisible="{Binding !IsPasswordEmpty}"/>
+				<TextBox x:Name="passwordTxtBox" PasswordChar="*" Watermark="{StaticResource PasswordLabel}" Text="{Binding EnteredPassword}"/>
+				<StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="{StaticResource LoginComponentsSpacing}">
+					<StackPanel.Styles>
+						<Style Selector="Button">
+							<Setter Property="Width" Value="{StaticResource LoginButtonWidth}"/>
+							<Setter Property="Height" Value="{StaticResource LoginButtonHeight}"/>
+							<Setter Property="FontSize" Value="{StaticResource ViewContentFontSize}"/>
+							<Setter Property="HorizontalContentAlignment" Value="Center"/>
+							<Setter Property="VerticalContentAlignment" Value="Center"/>
+							<Setter Property="FontWeight" Value="Bold"/>
+						</Style>
+					</StackPanel.Styles>
+					<Button Content="{StaticResource LoginTitle}" IsEnabled="{Binding CanLogin}" Command="{Binding LoginCommand}"/>
+					<Button Content="{StaticResource RegistrationTitle}" Command="{Binding SwitchToRegistrationViewCommand}"/>
+				</StackPanel>
+			</StackPanel>
+		</Border>
+	</Grid>
+</rxui:ReactiveUserControl>
